@@ -15,6 +15,7 @@ once installed you need to setup haxelib ( set path for library, default is fine
 **htmlHelper** my library for setting up html visuals and processing csv's could be used for WebGL  
 render.   
 `haxelib git htmlHelper https://github.com/nanjizal/htmlHelper.git`  
+  
 get the **covid19** github source  
 `git clone https://github.com/nanjizal/covid19.git`  
 
