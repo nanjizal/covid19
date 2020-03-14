@@ -10,7 +10,8 @@ once installed you need to setup haxelib ( set path for library, default is fine
 
 ## install libraries
 **datetime** ( hardly used )  
-`haxelib git datetime https://github.com/RealyUniqueName/DateTime.git ` 
+`haxelib git datetime https://github.com/RealyUniqueName/DateTime.git 
+  
 **htmlHelper** my library for setting up html visuals and processing csv's could be used for WebGL  
 render.   
 `haxelib git htmlHelper https://github.com/nanjizal/htmlHelper.git`  
