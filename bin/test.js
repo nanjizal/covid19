@@ -145,11 +145,49 @@ StringTools.rtrim = function(s) {
 StringTools.trim = function(s) {
 	return StringTools.ltrim(StringTools.rtrim(s));
 };
+StringTools.hex = function(n,digits) {
+	var s = "";
+	var hexChars = "0123456789ABCDEF";
+	while(true) {
+		s = hexChars.charAt(n & 15) + s;
+		n >>>= 4;
+		if(!(n > 0)) {
+			break;
+		}
+	}
+	if(digits != null) {
+		while(s.length < digits) s = "0" + s;
+	}
+	return s;
+};
 var covid19_Main = function() {
 	this.months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 	this.areaData = [];
 	this.statData = [];
+	this.scale = 0.0005;
 	new htmlHelper_tools_DivertTrace();
+	var e = null;
+	var this1;
+	if(e == null) {
+		var canvas = window.document.createElement("canvas");
+		var dom = canvas;
+		var style = dom.style;
+		style.paddingLeft = "0px";
+		style.paddingTop = "0px";
+		style.left = "0px";
+		style.top = "0px";
+		style.position = "absolute";
+		this1 = canvas;
+	} else {
+		this1 = e;
+	}
+	var canvas1 = this1;
+	canvas1.width = 1024;
+	canvas1.height = 768;
+	window.document.body.appendChild(canvas1);
+	var this2 = new htmlHelper_canvas_CanvasPlus(canvas1.getContext("2d",null),10,10);
+	this.surface = this2;
+	this.drawRectBorder();
 	this.textLoader = new htmlHelper_tools_TextLoader(["../data/postcodeAdmin.csv","../data/E_areas.csv","../data/covid19uk.csv"],$bind(this,this.finished));
 };
 covid19_Main.__name__ = true;
@@ -157,8 +195,98 @@ covid19_Main.main = function() {
 	new covid19_Main();
 };
 covid19_Main.prototype = {
-	finished: function() {
+	drawRect: function(x,y,w,h) {
+		var this1 = this.surface;
+		var r = 255;
+		var g = 0;
+		var b = 0;
+		this1.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + 0.3 + ")";
+		this1.me.beginPath();
+		var this2 = this.surface;
+		this2.me.lineWidth = 2.;
+		var r1 = 255;
+		var g1 = 165;
+		var b1 = 0;
+		this2.me.strokeStyle = "rgba(" + r1 + "," + g1 + "," + b1 + "," + 0.2 + ")";
+		var this3 = this.surface;
+		this3.x = x;
+		this3.y = y;
+		this3.me.moveTo(x,y);
+		var this4 = this.surface;
+		var x1 = x + w;
+		this4.x = x1;
+		this4.y = y;
+		this4.me.lineTo(x1,y);
+		var this5 = this.surface;
+		var x2 = x + w;
+		var y1 = y + h;
+		this5.x = x2;
+		this5.y = y1;
+		this5.me.lineTo(x2,y1);
+		var this6 = this.surface;
+		var y2 = y + h;
+		this6.x = x;
+		this6.y = y2;
+		this6.me.lineTo(x,y2);
+		var this7 = this.surface;
+		this7.x = x;
+		this7.y = y;
+		this7.me.lineTo(x,y);
+		var this8 = this.surface;
+		this8.me.stroke();
+		this8.me.closePath();
+		this8.me.fill();
+	}
+	,drawRectBorder: function() {
+		var ll = new covid19_geo_LongLatUK();
+		var min = ll.ll_to_osOld(50.10319,-7.64133);
+		var max = ll.ll_to_osOld(60.15456,1.75159);
+		var x = min.east * this.scale + 100;
+		var y = 500 - min.north * this.scale + 100;
+		var w = (max.east - min.east) * this.scale + 100;
+		var h = 500 - max.north * this.scale - (500 - min.north * this.scale);
+		var this1 = this.surface;
+		var r = 0;
+		var g = 0;
+		var b = 255;
+		this1.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + 0.8 + ")";
+		this1.me.beginPath();
+		var this2 = this.surface;
+		this2.me.lineWidth = 2.;
+		var tmp = StringTools.hex(16753920,6);
+		this2.me.strokeStyle = "#" + tmp;
+		var this3 = this.surface;
+		this3.x = x;
+		this3.y = y;
+		this3.me.moveTo(x,y);
+		var this4 = this.surface;
+		var x1 = x + w;
+		this4.x = x1;
+		this4.y = y;
+		this4.me.lineTo(x1,y);
+		var this5 = this.surface;
+		var x2 = x + w;
+		var y1 = y + h;
+		this5.x = x2;
+		this5.y = y1;
+		this5.me.lineTo(x2,y1);
+		var this6 = this.surface;
+		var y2 = y + h;
+		this6.x = x;
+		this6.y = y2;
+		this6.me.lineTo(x,y2);
+		var this7 = this.surface;
+		this7.x = x;
+		this7.y = y;
+		this7.me.lineTo(x,y);
+		var this8 = this.surface;
+		this8.me.stroke();
+		this8.me.closePath();
+		this8.me.fill();
+	}
+	,finished: function() {
 		this.parseCSV();
+		var str = "";
 		var _g = 0;
 		var _g1 = this.statData;
 		while(_g < _g1.length) {
@@ -167,8 +295,11 @@ covid19_Main.prototype = {
 			var this1 = i.date;
 			var days = ((this1 - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(this1)) / 86400 | 0) + 1;
 			if(datetime_utils_DateTimeMonthUtils.getMonthDay(days,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this1)) == 13 && i.totalCases > 0) {
-				var lat = 0;
-				var long = 0;
+				var lat = 0.;
+				var long = 0.;
+				var east = 0.;
+				var north = 0.;
+				var found = false;
 				var _g2 = 0;
 				var _g11 = this.areaData;
 				while(_g2 < _g11.length) {
@@ -177,18 +308,27 @@ covid19_Main.prototype = {
 					if(pos.admin_area.toLowerCase() == i.area.toLowerCase()) {
 						lat = pos.latitude;
 						long = pos.longitude;
+						east = pos.east;
+						north = pos.north;
+						found = true;
 						break;
 					}
 				}
+				var size = i.totalCases;
+				if(found) {
+					this.drawRect(east * this.scale - size / 2 + 100,500 - north * this.scale - size / 2,size,size);
+				}
 				var this2 = i.date;
 				var days1 = ((this2 - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(this2)) / 86400 | 0) + 1;
-				var tmp = datetime_utils_DateTimeMonthUtils.getMonthDay(days1,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this2)) + " ";
-				var tmp1 = this.months;
+				var str1 = datetime_utils_DateTimeMonthUtils.getMonthDay(days1,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this2)) + " ";
+				var str2 = this.months;
 				var this3 = i.date;
 				var days2 = ((this3 - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(this3)) / 86400 | 0) + 1;
-				haxe_Log.trace(tmp + tmp1[datetime_utils_DateTimeMonthUtils.getMonth(days2,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this3)) - 1] + "," + " " + i.area + " " + i.totalCases + " ill, " + "  lat " + lat + " long " + long,{ fileName : "src/covid19/Main.hx", lineNumber : 49, className : "covid19.Main", methodName : "finished"});
+				str += str1 + str2[datetime_utils_DateTimeMonthUtils.getMonth(days2,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this3)) - 1] + "," + " " + i.area + " " + i.totalCases + " ill, " + "  lat " + lat + " long " + long + " east " + Math.round(east) + " north " + Math.round(north);
+				str += "<br>";
 			}
 		}
+		haxe_Log.trace(str,{ fileName : "src/covid19/Main.hx", lineNumber : 110, className : "covid19.Main", methodName : "finished"});
 	}
 	,parseCSV: function() {
 		var txtContents = this.textLoader.contents;
@@ -338,12 +478,15 @@ covid19_Main.prototype = {
 			var i1 = _g3++;
 			var tmp1 = this.areaData;
 			var arr4 = areaLatLong[i1];
-			var this2 = new covid19_datas_InternalLongLatAreas(StringTools.trim(arr4[0]),StringTools.trim(arr4[1]),parseFloat(arr4[2]),parseFloat(arr4[3]),Std.parseInt(arr4[4]),Std.parseInt(arr4[5]),Std.parseInt(arr4[6]),Std.parseInt(arr4[7]));
+			var ll = new covid19_geo_LongLatUK();
+			var val = ll.ll_to_osOld(parseFloat(arr4[2]),parseFloat(arr4[3]));
+			ll = null;
+			var this2 = new covid19_datas_InternalLongLatAreas(StringTools.trim(arr4[0]),StringTools.trim(arr4[1]),parseFloat(arr4[2]),parseFloat(arr4[3]),Std.parseInt(arr4[4]),Std.parseInt(arr4[5]),Std.parseInt(arr4[6]),Std.parseInt(arr4[7]),val.east,val.north);
 			tmp1[i1] = this2;
 		}
 	}
 };
-var covid19_datas_InternalLongLatAreas = function(admin_area,county,latitude,longitude,postcodes,active_postcodes,population,households) {
+var covid19_datas_InternalLongLatAreas = function(admin_area,county,latitude,longitude,postcodes,active_postcodes,population,households,east,north) {
 	this.admin_area = admin_area;
 	this.county = county;
 	this.latitude = latitude;
@@ -352,6 +495,8 @@ var covid19_datas_InternalLongLatAreas = function(admin_area,county,latitude,lon
 	this.active_postcodes = active_postcodes;
 	this.population = population;
 	this.households = households;
+	this.east = east;
+	this.north = north;
 };
 covid19_datas_InternalLongLatAreas.__name__ = true;
 var covid19_datas_InternalStatsC19 = function(date,country,areaCode,area,totalCases) {
@@ -362,6 +507,58 @@ var covid19_datas_InternalStatsC19 = function(date,country,areaCode,area,totalCa
 	this.totalCases = totalCases;
 };
 covid19_datas_InternalStatsC19.__name__ = true;
+var covid19_geo_LongLatUK = function() {
+	this.lambda0 = -2 * Math.PI / 180;
+	this.phi0 = 49 * Math.PI / 180;
+	this.f0 = 0.9996012717;
+	this.e0 = 400000.;
+	this.n0 = -100000.;
+	this.osgb36_b = 6356256.909;
+	this.osgb36_a = 6377563.396;
+};
+covid19_geo_LongLatUK.__name__ = true;
+covid19_geo_LongLatUK.prototype = {
+	fM: function(phi,a,b) {
+		var n = (a - b) / (a + b);
+		var n2 = Math.pow(n,2);
+		var n3 = n * n2;
+		var dphi = phi - this.phi0;
+		var sphi = phi + this.phi0;
+		return b * this.f0 * ((1 + n + 1.25 * (n2 + n3)) * dphi - (3 * n + 3 * n2 + 2.625 * n3) * Math.sin(dphi) * Math.cos(sphi) + 1.875 * (n2 + n3) * Math.sin(2 * dphi) * Math.cos(2 * sphi) - 1.45833333333333326 * n3 * Math.sin(3 * dphi) * Math.cos(3 * sphi));
+	}
+	,ll_to_osOld: function(phi,lam) {
+		return this.ll_to_os(phi,lam,this.osgb36_a,this.osgb36_b);
+	}
+	,ll_to_os: function(phi,lam,a,b) {
+		var phi1 = phi * Math.PI / 180;
+		var lam1 = lam * Math.PI / 180;
+		var a2 = Math.pow(a,2);
+		var e2 = (a2 - Math.pow(b,2)) / a2;
+		var rho = a * this.f0 * (1 - e2) * Math.pow(1 - Math.pow(e2 * Math.sin(phi1),2),-1.5);
+		var nu = a * this.f0 / Math.sqrt(1 - e2 * Math.pow(Math.sin(phi1),2));
+		var eta2 = nu / rho - 1;
+		var m = this.fM(phi1,a,b);
+		var sin_phi = Math.sin(phi1);
+		var cos_phi = Math.cos(phi1);
+		var cos_phi2 = Math.pow(cos_phi,2);
+		var cos_phi3 = cos_phi2 * cos_phi;
+		var cos_phi5 = cos_phi3 * cos_phi2;
+		var tan_phi2 = Math.pow(Math.tan(phi1),2);
+		var tan_phi4 = tan_phi2 * tan_phi2;
+		var a1 = m + this.n0;
+		var a21 = nu / 2 * sin_phi * cos_phi;
+		var a3 = nu / 24 * sin_phi * cos_phi3 * (5 - tan_phi2 + 9 * eta2);
+		var a4 = nu / 720 * sin_phi * cos_phi5 * (61 - 58 * tan_phi2 + tan_phi4);
+		var b1 = nu * cos_phi;
+		var b2 = nu / 6 * cos_phi3 * (nu / rho - tan_phi2);
+		var b3 = nu / 120 * cos_phi5 * (5 - 18 * tan_phi2 + tan_phi4 + eta2 * (14 - 58 * tan_phi2));
+		var lml0 = lam1 - this.lambda0;
+		var lml02 = Math.pow(lml0,2);
+		var n = a1 + lml02 * (a21 + lml02 * (a3 + a4 * lml02));
+		var e = this.e0 + lml0 * (b1 + lml02 * (b2 + b3 * lml02));
+		return { east : e, north : n};
+	}
+};
 var datetime__$DateTime_DateTime_$Impl_$ = {};
 datetime__$DateTime_DateTime_$Impl_$.__name__ = true;
 datetime__$DateTime_DateTime_$Impl_$.getYear = function(this1) {
@@ -883,6 +1080,20 @@ var haxe_io_Error = $hxEnums["haxe.io.Error"] = { __ename__ : true, __constructs
 	,OutsideBounds: {_hx_index:2,__enum__:"haxe.io.Error",toString:$estr}
 	,Custom: ($_=function(e) { return {_hx_index:3,e:e,__enum__:"haxe.io.Error",toString:$estr}; },$_.__params__ = ["e"],$_)
 };
+var htmlHelper_canvas_CanvasPlus = function(me,x,y) {
+	if(y == null) {
+		y = 0;
+	}
+	if(x == null) {
+		x = 0;
+	}
+	this.y = 0.;
+	this.x = 0.;
+	this.x = x;
+	this.y = y;
+	this.me = me;
+};
+htmlHelper_canvas_CanvasPlus.__name__ = true;
 var htmlHelper_tools_DivertTrace = function(left,d) {
 	if(left == null) {
 		left = 610;
