@@ -54,3 +54,13 @@ Data linking admin areas ( 9 digit number starting with e ) to lat/long position
 https://www.doogal.co.uk/  
   
 ( OpenMaps can provides KLM data related to the admin areas, but licences are not MIT and require lot more effort to integrate but would make for an interesting extension. )
+  
+You can find uk.gov data direct from 
+
+https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
+
+and visualizations
+
+https://www.arcgis.com/apps/opsdashboard/index.html?fbclid=IwAR1aGKrtLTUuBlJHn4i-RNCU8Pgww17a_ZfTJ1z1l-7OdMmh4Tv9nQZt0Lo#/f94c3c90da5b4e9f9a0b19484dd4bb14  
+
+But hopefully this project can allow for more flexible possible generation and extensions utilizing Tom Whites collated data, than the direct gov links.
