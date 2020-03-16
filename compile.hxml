@@ -3,7 +3,8 @@
 #-debug
 # html/js setup of simple webgl
 -lib htmlHelper
--lib datetime;
+-lib datetime
+-lib pallette
 -main covid19.Main
 #-D no-inline
 -D js-flatten 

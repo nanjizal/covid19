@@ -114,6 +114,22 @@ var StringBuf = function() {
 StringBuf.__name__ = true;
 var StringTools = function() { };
 StringTools.__name__ = true;
+StringTools.startsWith = function(s,start) {
+	if(s.length >= start.length) {
+		return s.lastIndexOf(start,0) == 0;
+	} else {
+		return false;
+	}
+};
+StringTools.endsWith = function(s,end) {
+	var elen = end.length;
+	var slen = s.length;
+	if(slen >= elen) {
+		return s.indexOf(end,slen - elen) == slen - elen;
+	} else {
+		return false;
+	}
+};
 StringTools.isSpace = function(s,pos) {
 	var c = HxOverrides.cca(s,pos);
 	if(!(c > 8 && c < 14)) {
@@ -161,11 +177,14 @@ StringTools.hex = function(n,digits) {
 	return s;
 };
 var covid19_Main = function() {
+	this.currentDay = 5;
+	this.count = 0;
 	this.months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 	this.areaData = [];
 	this.statData = [];
 	this.scale = 0.0005;
-	new htmlHelper_tools_DivertTrace();
+	this.csvStats = "https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv";
+	this.divertTrace = new htmlHelper_tools_DivertTrace();
 	var e = null;
 	var this1;
 	if(e == null) {
@@ -188,18 +207,18 @@ var covid19_Main = function() {
 	var this2 = new htmlHelper_canvas_CanvasPlus(canvas1.getContext("2d",null),10,10);
 	this.surface = this2;
 	this.drawRectBorder();
-	this.textLoader = new htmlHelper_tools_TextLoader(["../data/postcodeAdmin.csv","../data/E_areas.csv","../data/covid19uk.csv"],$bind(this,this.finished));
+	this.textLoader = new htmlHelper_tools_TextLoader(["../data/postcodeAdmin.csv","../data/E_areas.csv",this.csvStats],$bind(this,this.finished));
 };
 covid19_Main.__name__ = true;
 covid19_Main.main = function() {
 	new covid19_Main();
 };
 covid19_Main.prototype = {
-	drawRect: function(x,y,w,h) {
+	drawRect: function(x,y,w,h,fillColor) {
 		var this1 = this.surface;
-		var r = 255;
-		var g = 0;
-		var b = 0;
+		var r = fillColor >> 16 & 255;
+		var g = fillColor >> 8 & 255;
+		var b = fillColor & 255;
 		this1.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + 0.3 + ")";
 		this1.me.beginPath();
 		var this2 = this.surface;
@@ -207,7 +226,7 @@ covid19_Main.prototype = {
 		var r1 = 255;
 		var g1 = 165;
 		var b1 = 0;
-		this2.me.strokeStyle = "rgba(" + r1 + "," + g1 + "," + b1 + "," + 0.2 + ")";
+		this2.me.strokeStyle = "rgba(" + r1 + "," + g1 + "," + b1 + "," + 0. + ")";
 		var this3 = this.surface;
 		this3.x = x;
 		this3.y = y;
@@ -249,7 +268,7 @@ covid19_Main.prototype = {
 		var r = 0;
 		var g = 0;
 		var b = 255;
-		this1.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + 0.8 + ")";
+		this1.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + 0. + ")";
 		this1.me.beginPath();
 		var this2 = this.surface;
 		this2.me.lineWidth = 2.;
@@ -284,57 +303,134 @@ covid19_Main.prototype = {
 		this8.me.closePath();
 		this8.me.fill();
 	}
+	,getEastNorth: function(area) {
+		var east = 0.;
+		var north = 0.;
+		var found = false;
+		var _g = 0;
+		var _g1 = this.areaData;
+		while(_g < _g1.length) {
+			var pos = _g1[_g];
+			++_g;
+			if(pos.admin_area.toLowerCase() == area.toLowerCase()) {
+				east = pos.east;
+				north = pos.north;
+				found = true;
+				break;
+			}
+		}
+		if(!found) {
+			var _g2 = 0;
+			var _g3 = this.areaData;
+			while(_g2 < _g3.length) {
+				var pos1 = _g3[_g2];
+				++_g2;
+				if(pos1.county.toLowerCase() == area.toLowerCase()) {
+					east = pos1.east;
+					north = pos1.north;
+					found = true;
+					break;
+				}
+			}
+		}
+		if(!found) {
+			var _g21 = 0;
+			var _g31 = this.areaData;
+			while(_g21 < _g31.length) {
+				var pos2 = _g31[_g21];
+				++_g21;
+				if(pos2.admin_area.indexOf(" ") != -1) {
+					if(pos2.admin_area.toLowerCase().indexOf(area.toLowerCase()) != -1) {
+						east = pos2.east;
+						north = pos2.north;
+						found = true;
+						break;
+					}
+				}
+			}
+		}
+		return { east : east, north : north};
+	}
+	,isEastNorth: function(v) {
+		return !(v.east == 0. && v.north == 0.);
+	}
+	,lookupEastNorth: function(areaCode,inArea) {
+		var area = "";
+		var _this = this.e_areas;
+		if((__map_reserved[areaCode] != null ? _this.existsReserved(areaCode) : _this.h.hasOwnProperty(areaCode)) == true) {
+			var _this1 = this.e_areas;
+			area = __map_reserved[areaCode] != null ? _this1.getReserved(areaCode) : _this1.h[areaCode];
+		}
+		return this.getEastNorth(area);
+	}
 	,finished: function() {
 		this.parseCSV();
+		if(htmlHelper_tools_AnimateTimer.s == null) {
+			htmlHelper_tools_AnimateTimer.s = window.document.createElement("style");
+			htmlHelper_tools_AnimateTimer.s.innerHTML = "@keyframes spin { from { transform:rotate( 0deg ); } to { transform:rotate( 360deg ); } }";
+			window.document.getElementsByTagName("head")[0].appendChild(htmlHelper_tools_AnimateTimer.s);
+			htmlHelper_tools_AnimateTimer.s.animation = "spin 1s linear infinite";
+			htmlHelper_tools_AnimateTimer.loop(60.0);
+		}
+		htmlHelper_tools_AnimateTimer.onFrame = $bind(this,this.render);
+	}
+	,render: function(i) {
+		this.count++;
+		if(this.count % 15 == 0) {
+			this.count = 0;
+			this.renderDate(this.currentDay++,3);
+		}
+	}
+	,renderDate: function(day,month) {
 		var str = "";
+		this.divertTrace.traceString = "";
+		var colors = [-1098686,-893376,-884166,-617161,-742865,-605897,-338891,-134353,-211,-2100183,-5778134,-8796379,-11288539,-11352449,-11686193,-12217654,-12617788,-12953665,-13354819,-11851843,-9230154,-4904763,-3986796,-2280591];
+		colors.reverse();
 		var _g = 0;
 		var _g1 = this.statData;
 		while(_g < _g1.length) {
 			var i = _g1[_g];
 			++_g;
-			var this1 = i.date;
-			var days = ((this1 - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(this1)) / 86400 | 0) + 1;
-			if(datetime_utils_DateTimeMonthUtils.getMonthDay(days,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this1)) == 13 && i.totalCases > 0) {
-				var lat = 0.;
-				var long = 0.;
-				var east = 0.;
-				var north = 0.;
+			var date = i.date;
+			var tmp;
+			var days = ((date - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(date)) / 86400 | 0) + 1;
+			if(datetime_utils_DateTimeMonthUtils.getMonthDay(days,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(date)) == day) {
+				var days1 = ((date - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(date)) / 86400 | 0) + 1;
+				tmp = datetime_utils_DateTimeMonthUtils.getMonth(days1,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(date)) == month;
+			} else {
+				tmp = false;
+			}
+			if(tmp) {
 				var found = false;
-				var _g2 = 0;
-				var _g11 = this.areaData;
-				while(_g2 < _g11.length) {
-					var pos = _g11[_g2];
-					++_g2;
-					if(pos.admin_area.toLowerCase() == i.area.toLowerCase()) {
-						lat = pos.latitude;
-						long = pos.longitude;
-						east = pos.east;
-						north = pos.north;
-						found = true;
-						break;
-					}
+				var en = this.getEastNorth(i.area);
+				found = this.isEastNorth(en);
+				if(!found) {
+					en = this.lookupEastNorth(i.areaCode,i.area);
+					found = this.isEastNorth(en);
 				}
-				var size = i.totalCases;
+				var east = en.east;
+				var north = en.north;
+				var size = i.totalCases / 1.8;
 				if(found) {
-					this.drawRect(east * this.scale - size / 2 + 100,500 - north * this.scale - size / 2,size,size);
+					this.drawRect(east * this.scale - size / 2 + 100,500 - north * this.scale - size / 2,size,size,colors[Math.round(i.totalCases / 3)]);
 				}
-				var this2 = i.date;
-				var days1 = ((this2 - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(this2)) / 86400 | 0) + 1;
-				var str1 = datetime_utils_DateTimeMonthUtils.getMonthDay(days1,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this2)) + " ";
+				var this1 = i.date;
+				var days2 = ((this1 - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(this1)) / 86400 | 0) + 1;
+				var str1 = datetime_utils_DateTimeMonthUtils.getMonthDay(days2,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this1)) + " ";
 				var str2 = this.months;
-				var this3 = i.date;
-				var days2 = ((this3 - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(this3)) / 86400 | 0) + 1;
-				str += str1 + str2[datetime_utils_DateTimeMonthUtils.getMonth(days2,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this3)) - 1] + "," + " " + i.area + " " + i.totalCases + " ill, " + "  lat " + lat + " long " + long + " east " + Math.round(east) + " north " + Math.round(north);
+				var this2 = i.date;
+				var days3 = ((this2 - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(this2)) / 86400 | 0) + 1;
+				str += str1 + str2[datetime_utils_DateTimeMonthUtils.getMonth(days3,datetime__$DateTime_DateTime_$Impl_$.isLeapYear(this2)) - 1] + "," + " " + i.area + " " + i.totalCases + " ill, " + Math.round(east) + " north " + Math.round(north);
 				str += "<br>";
 			}
 		}
-		haxe_Log.trace(str,{ fileName : "src/covid19/Main.hx", lineNumber : 110, className : "covid19.Main", methodName : "finished"});
+		haxe_Log.trace(str,{ fileName : "src/covid19/Main.hx", lineNumber : 184, className : "covid19.Main", methodName : "renderDate"});
 	}
 	,parseCSV: function() {
 		var txtContents = this.textLoader.contents;
 		var adminStr = __map_reserved["postcodeAdmin.csv"] != null ? txtContents.getReserved("postcodeAdmin.csv") : txtContents.h["postcodeAdmin.csv"];
 		var e_areaStr = __map_reserved["E_areas.csv"] != null ? txtContents.getReserved("E_areas.csv") : txtContents.h["E_areas.csv"];
-		var covid19Str = __map_reserved["covid19uk.csv"] != null ? txtContents.getReserved("covid19uk.csv") : txtContents.h["covid19uk.csv"];
+		var covid19Str = __map_reserved["covid-19-cases-uk.csv"] != null ? txtContents.getReserved("covid-19-cases-uk.csv") : txtContents.h["covid-19-cases-uk.csv"];
 		var sl = new htmlHelper_tools_StringCodeIterator(e_areaStr);
 		sl.c = sl.str.charCodeAt(sl.pos++);
 		var arr = [];
@@ -469,7 +565,17 @@ covid19_Main.prototype = {
 			var i = _g1++;
 			var tmp = this.statData;
 			var arr3 = covid19stats[i];
-			var this1 = new covid19_datas_InternalStatsC19(StringTools.trim(arr3[0]),StringTools.trim(arr3[1]),StringTools.trim(arr3[2]),StringTools.trim(arr3[3]),Std.parseInt(arr3[4]));
+			if(StringTools.trim(arr3[4]) == "1 to 4") {
+				arr3[4] = "2";
+			}
+			var area = StringTools.trim(arr3[3]);
+			if(StringTools.startsWith(area,"\"")) {
+				area = HxOverrides.substr(area,1,area.length);
+			}
+			if(StringTools.endsWith(area,"\"")) {
+				area = HxOverrides.substr(area,0,area.length - 1);
+			}
+			var this1 = new covid19_datas_InternalStatsC19(StringTools.trim(arr3[0]),StringTools.trim(arr3[1]),StringTools.trim(arr3[2]),area,Std.parseInt(arr3[4]));
 			tmp[i] = this1;
 		}
 		var _g3 = 0;
@@ -833,6 +939,12 @@ haxe_ds_StringMap.prototype = {
 			return this.rh["$" + key];
 		}
 	}
+	,existsReserved: function(key) {
+		if(this.rh == null) {
+			return false;
+		}
+		return this.rh.hasOwnProperty("$" + key);
+	}
 };
 var haxe_http_HttpBase = function(url) {
 	this.url = url;
@@ -1094,6 +1206,16 @@ var htmlHelper_canvas_CanvasPlus = function(me,x,y) {
 	this.me = me;
 };
 htmlHelper_canvas_CanvasPlus.__name__ = true;
+var htmlHelper_tools_AnimateTimer = function() { };
+htmlHelper_tools_AnimateTimer.__name__ = true;
+htmlHelper_tools_AnimateTimer.loop = function(tim) {
+	window.requestAnimationFrame(htmlHelper_tools_AnimateTimer.loop);
+	if(htmlHelper_tools_AnimateTimer.onFrame != null) {
+		htmlHelper_tools_AnimateTimer.onFrame(htmlHelper_tools_AnimateTimer.counter);
+	}
+	htmlHelper_tools_AnimateTimer.counter++;
+	return true;
+};
 var htmlHelper_tools_DivertTrace = function(left,d) {
 	if(left == null) {
 		left = 610;
@@ -1319,5 +1441,6 @@ Object.defineProperty(js__$Boot_HaxeError.prototype,"message",{ get : function()
 	return String(this.val);
 }});
 js_Boot.__toStr = ({ }).toString;
+htmlHelper_tools_AnimateTimer.counter = 0;
 covid19_Main.main();
 })(typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);

@@ -23,10 +23,16 @@ abstract StatsC19( InternalStatsC19 ) from InternalStatsC19 to InternalStatsC19 
     @:from
     public inline static 
     function fromArray( arr: Array<String> ){
+        if( StringTools.trim( arr[4] ) == '1 to 4'){
+            arr[4] = '2';
+        }
+        var area = StringTools.trim( arr[3] );
+        if( StringTools.startsWith( area, '"') ) area = area.substr( 1, area.length );
+        if( StringTools.endsWith( area, '"' ) )  area = area.substr( 0, area.length - 1 );
         return new StatsC19( { date:       StringTools.trim( arr[0] )
                              , country:    StringTools.trim( arr[1] ) 
                              , areaCode:   StringTools.trim( arr[2] )
-                             , area:       StringTools.trim( arr[3] )
+                             , area:       area
                              , totalCases: Std.parseInt( arr[4] ) 
                              } );
     }
