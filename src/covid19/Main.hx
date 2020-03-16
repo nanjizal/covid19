@@ -169,7 +169,7 @@ class Main {
                 }*/
                 var size = i.totalCases/1.8;
                 // flip north
-                if( found ) drawRect( east * scale - size/2 + 100
+                if( found && i.totalCases != 0 ) drawRect( east * scale - size/2 + 100
                                     , 500 - north *scale - size/2
                                     , size, size, colors[ Math.round( i.totalCases/3 ) ] );
                 

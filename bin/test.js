@@ -411,7 +411,7 @@ covid19_Main.prototype = {
 				var east = en.east;
 				var north = en.north;
 				var size = i.totalCases / 1.8;
-				if(found) {
+				if(found && i.totalCases != 0) {
 					this.drawRect(east * this.scale - size / 2 + 100,500 - north * this.scale - size / 2,size,size,colors[Math.round(i.totalCases / 3)]);
 				}
 				var this1 = i.date;
