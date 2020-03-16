@@ -575,7 +575,11 @@ covid19_Main.prototype = {
 			if(StringTools.endsWith(area,"\"")) {
 				area = HxOverrides.substr(area,0,area.length - 1);
 			}
-			var this1 = new covid19_datas_InternalStatsC19(StringTools.trim(arr3[0]),StringTools.trim(arr3[1]),StringTools.trim(arr3[2]),area,Std.parseInt(arr3[4]));
+			var totalCases = Std.parseInt(arr3[4]);
+			if(totalCases == null && arr3.length == 6) {
+				totalCases = Std.parseInt(arr3[5]);
+			}
+			var this1 = new covid19_datas_InternalStatsC19(StringTools.trim(arr3[0]),StringTools.trim(arr3[1]),StringTools.trim(arr3[2]),area,totalCases);
 			tmp[i] = this1;
 		}
 		var _g3 = 0;
