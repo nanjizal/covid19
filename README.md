@@ -63,6 +63,6 @@ https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
 
 and visualizations
 
-https://www.arcgis.com/apps/opsdashboard/index.html?fbclid=IwAR1aGKrtLTUuBlJHn4i-RNCU8Pgww17a_ZfTJ1z1l-7OdMmh4Tv9nQZt0Lo#/f94c3c90da5b4e9f9a0b19484dd4bb14  
+https://www.arcgis.com/apps/opsdashboard/index.html
 
 But hopefully this project can allow for more flexible possible generation and extensions utilizing Tom Whites collated data, than the direct gov links currently provide.
