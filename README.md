@@ -34,7 +34,7 @@ You can find uk.gov data direct from
 
 https://www.gov.uk/guidance/coronavirus-covid-19-information-for-the-public
 
-and the **gov's** approach to visualizations, Manchester is slightly misleading the hotspot is London!!
+and the **gov's** approach to visualizations, Manchester is slightly misleading the hotspot is London!!  
 *( Not related to my visualization. )*
 
 https://www.arcgis.com/apps/opsdashboard/index.html
