@@ -10,7 +10,7 @@ You can see it running here:
   
 You can find latest **Covid19 data** from  
 https://github.com/tomwhite/covid-19-uk-data  
-To use the data do a search and replace on tab and replace with a comma.  
+The data places/areas are mapped to lat/long positions and then the positions are mapped to OS grid Map, 1:2000 scale ( Canvas pixels and km?, sized it to fit well on screen and the factor was 2000 ).
 
 You can find details of mapping **Lat/Longtitude** to **Ordinance Survay Data** from:  
 https://www.movable-type.co.uk/scripts/latlong-vincenty.html  
