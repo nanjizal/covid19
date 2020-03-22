@@ -67,13 +67,13 @@ class LongLatUK {
         var lam = lambda0 + eme0 * (d1 + eme02*(-d2 + eme02*(d3 - d4*eme02)));
         return { lat: phi*180/Math.PI, long: lam*180/Math.PI };
     }
-    public function ll_to_osOld( phi: Float, lam: Float ): { east: Float, north: Float } {
+    public function ll_to_osOld( phi: Float, lam: Float ): EastNorth {
         return ll_to_os( phi, lam, osgb36_a, osgb36_b );
     }
-    public function ll_to_osNew( phi: Float, lam: Float ): { east: Float, north: Float } {
+    public function ll_to_osNew( phi: Float, lam: Float ): EastNorth {
         return ll_to_os( phi, lam, wgs84_a, wgs84_b );
     }
-    public function ll_to_os( phi: Float, lam: Float, a: Float, b: Float ): { east: Float, north: Float } {
+    public function ll_to_os( phi: Float, lam: Float, a: Float, b: Float ): EastNorth {
         // Convert from latitude and longitude to OS grid reference (E, N).
         // Latitude, phi, and longitude, lambda, are to be provided in degrees.
         var phi = phi*Math.PI/180;

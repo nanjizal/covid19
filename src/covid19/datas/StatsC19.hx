@@ -23,20 +23,35 @@ abstract StatsC19( InternalStatsC19 ) from InternalStatsC19 to InternalStatsC19 
     @:from
     public inline static 
     function fromArray( arr: Array<String> ){
-        if( StringTools.trim( arr[4] ) == '1 to 4'){
-            arr[4] = '2';
-        }
-        var area = StringTools.trim( arr[3] );
-        if( StringTools.startsWith( area, '"') ) area = area.substr( 1, area.length );
-        if( StringTools.endsWith( area, '"' ) )  area = area.substr( 0, area.length - 1 );
-        var totalCases = Std.parseInt( arr[4] );
-        if( totalCases == null && arr.length == 6 ) totalCases = Std.parseInt( arr[5] );
-        return new StatsC19( { date:       StringTools.trim( arr[0] )
-                             , country:    StringTools.trim( arr[1] ) 
-                             , areaCode:   StringTools.trim( arr[2] )
-                             , area:       area
-                             , totalCases: totalCases
+        return new StatsC19( { date:       clean( arr[0] )
+                             , country:    clean( arr[1] ) 
+                             , areaCode:   clean( arr[2] )
+                             , area:       cleanPlus( arr[3] )
+                             , totalCases: cleanTotalCases( arr )
                              } );
     }
-    
+    public inline static 
+    function cleanPlus( str: String ){
+        str = clean( str );
+        if( StringTools.startsWith( str, '"' ) ) str = str.substr( 1, str.length );
+        if( StringTools.endsWith( str, '"' )   ) str = str.substr( 0, str.length );
+        return str;
+    }
+    public inline static 
+    function clean( str: String ){
+        StringTools.trim( str );
+        return str;
+    }
+    public inline static
+    function cleanTotalCases( arr: Array<String> ): Int {
+        var str = clean( arr[4] );
+        if( str == '1 to 4' ) str = '2';
+        var totalCases = Std.parseInt( str );
+        // if comma in name the totalCount location can be shifted by 1.
+        if( totalCases == null && arr.length == 6 ){
+            str = clean( arr[5] );
+            totalCases = Std.parseInt( str );
+        }
+        return totalCases;
+    }
 }

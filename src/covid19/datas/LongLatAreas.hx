@@ -41,9 +41,7 @@ abstract LongLatAreas( InternalLongLatAreas ) from InternalLongLatAreas to Inter
     @:from
     public inline static 
     function fromArray( arr: Array<String> ){
-        var ll = new LongLatUK();
-        var val = ll.ll_to_osOld( Std.parseFloat( arr[2] ), Std.parseFloat( arr[3] ) );
-        ll = null;
+        var val = toOScoordinates( arr );
         return new LongLatAreas( { admin_area:       StringTools.trim( arr[0] )
                                 , county:            StringTools.trim( arr[1] )
                                 , latitude:          Std.parseFloat( arr[2] )
@@ -55,5 +53,13 @@ abstract LongLatAreas( InternalLongLatAreas ) from InternalLongLatAreas to Inter
                                 , east:              val.east
                                 , north:             val.north
                              } );
+    }
+    public static inline
+    function toOScoordinates( arr: Array<String> ): { east: Float, north: Float }{
+        var ll = new LongLatUK();
+        var toFloat =  Std.parseFloat;
+        var val = ll.ll_to_osOld( toFloat( arr[2] ), toFloat( arr[3] ) );
+        ll = null;
+        return val;
     }
 }
