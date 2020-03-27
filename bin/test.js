@@ -782,8 +782,8 @@ covid19_geo_LongLatUK.prototype = {
 	}
 };
 var covid19_visual_UKcanvasPlot = function(surface) {
-	this.colorChange = 0.125;
-	this.sizeScale = 0.185185185185185175;
+	this.colorChange = 0.0454545454545454558;
+	this.sizeScale = 0.0555555555555555525;
 	this.scale = 0.0005;
 	this.alpha = 0.3;
 	this.maxY = 1.75159;

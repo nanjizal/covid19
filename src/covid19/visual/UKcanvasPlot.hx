@@ -9,8 +9,8 @@ class UKcanvasPlot {
     var maxY        = 1.75159;
     public var alpha       = 0.3;
     public var scale       = 1/2000;
-    public var sizeScale   = ( 1/(1.8 * 3) );
-    public var colorChange = ( 1/8 );
+    public var sizeScale   = ( 1/(1.8 * 10) );
+    public var colorChange = ( 1/22 );
     public var surface:    Surface;
     public function new( surface: Surface ){
         this.surface = surface;
