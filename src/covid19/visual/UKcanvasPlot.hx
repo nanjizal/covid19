@@ -7,6 +7,9 @@ class UKcanvasPlot {
     var minY        = -7.64133;
     var maxX        = 60.15456;
     var maxY        = 1.75159;
+    var ll          = new LongLatUK();
+    public var dx = -57.;
+    public var dy = 60.;
     public var alpha       = 0.3;
     public var scale       = 1/2000;
     public var sizeScale   = ( 1/(1.8 * 10) );
@@ -17,7 +20,57 @@ class UKcanvasPlot {
     }
     public inline
     function toXY( east: Float, north: Float ){
-        return { x: east * scale + 100, y: 500 - north * scale };// flip north
+        return { x: east * scale + 100 + dx, y: 500 - north * scale + dy };// flip north
+    }
+    public inline
+    function plotGrid(){
+        surface.beginFill( 0x0000ff, 0. );
+        surface.lineStyle( 1., 0x0c0cf0, 0.2 );
+        var minLat = 49;
+        var maxLat = 60;
+        var minLong = -9;
+        var maxLong = 2;
+        for( lat in minLat...maxLat ){
+            if( (lat+1)%2 == 0 ) continue;
+            var v = toOS( lat, minLong );
+            var xy = toXY( v.east, v.north );
+            surface.moveTo( xy.x, xy.y );
+            for( long in minLong...maxLong ){
+                var v = toOS( lat, long );
+                var xy = toXY( v.east, v.north );
+                surface.lineTo( xy.x, xy.y );
+                var v = toOS( lat, long + 0.25 );
+                var xy = toXY( v.east, v.north );
+                surface.lineTo( xy.x, xy.y );
+                var v = toOS( lat, long + 0.5 );
+                var xy = toXY( v.east, v.north );
+                surface.lineTo( xy.x, xy.y );
+                var v = toOS( lat, long + 0.75 );
+                var xy = toXY( v.east, v.north );
+                surface.lineTo( xy.x, xy.y );
+            }
+            var v = toOS( lat, maxLong + 1. );
+            var xy = toXY( v.east, v.north );
+            surface.lineTo( xy.x, xy.y );
+        }
+        
+        for( long in minLong...maxLong+2 ){
+            if( (long+1)%2 == 0 ) continue;
+            var v = toOS( minLat, long );
+            var xy = toXY( v.east, v.north );
+            surface.moveTo( xy.x, xy.y );
+            for( lat in minLat...maxLat ){
+                var v = toOS( lat, long );
+                var xy = toXY( v.east, v.north );
+                surface.lineTo( xy.x, xy.y );
+            }
+        }
+        surface.endFill();
+    }
+    public inline
+    function toOS( latitude: Float, longitude: Float ): { east: Float, north: Float }{
+        var val = ll.ll_to_osOld( latitude, longitude );
+        return val;
     }
     public
     function plot( eastNorth: EastNorth, cases: Int, colors: Array<Int> ){

@@ -5,6 +5,7 @@
 -lib htmlHelper
 -lib datetime
 -lib pallette
+-lib uk
 -main covid19.Main
 #-D no-inline
 -D js-flatten 

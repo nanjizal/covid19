@@ -22,7 +22,7 @@ import htmlHelper.tools.DivertTrace;
 import htmlHelper.canvas.CanvasWrapper;
 import htmlHelper.canvas.Surface;
 import pallette.ColorWheel24;
-
+import uk.CanvasUK;
 import js.Browser;
 // sources... 
 // https://github.com/tomwhite/covid-19-uk-data/blob/master/data/covid-19-cases-uk.csv
@@ -59,7 +59,15 @@ class Main {
         canvas.height = 768;
         Browser.document.body.appendChild( cast canvas );
         surface = new Surface({ x: 10, y: 10, me: canvas.getContext2d() });
+        var uk = new CanvasUK( surface );
+        uk.dx = 28;
+        uk.dy = 47;
+        uk.alpha = 0.7;
+        uk.scaleY = 0.975;
+        uk.scaleX = 1.04;
+        uk.draw();
         mapPlot = new UKcanvasPlot( surface );
+        mapPlot.plotGrid();
         textLoader = new TextLoader( ['../data/postcodeAdmin.csv'
                                      ,'../data/E_areas.csv'
                                      ,'../data/latLongAdditional.csv'
@@ -70,9 +78,9 @@ class Main {
         for( i in 0...citiesArr.length ){
             var city = citiesArr[ i ];
             var p = mapPlot.toXY( city.east, city.north );
-            mapPlot.circle36( 0xf7f7f7, 1, p.x, p.y, 10. );
+            mapPlot.circle36( 0x99c799, 0.1, p.x, p.y, 2. );//f7f7f7
         }
-        mapPlot.drawRectBorder();
+        //mapPlot.drawRectBorder();
     }
     public function finished(){
         parseCSV();
