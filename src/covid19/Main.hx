@@ -66,7 +66,7 @@ class Main {
         textLoader = new TextLoader( ['../data/postcodeAdmin.csv'
                                      ,'../data/E_areas.csv'
                                      ,'../data/latLongAdditional.csv'
-                                     ,'../data/SomeCities.csv'
+                                     /*,'../data/SomeCities.csv'*/
                                      , csvStats ], finished );
     }
     public
@@ -80,6 +80,8 @@ class Main {
         uk.scaleX = 1.04;
         uk.draw();
     }
+    // don't bother drawing cities not really needed.
+    /*
     public
     function drawGraph(){
         for( i in 0...citiesArr.length ){
@@ -87,12 +89,11 @@ class Main {
             var p = mapPlot.toXY( city.east, city.north );
             mapPlot.circle36( 0x99c799, 0.1, p.x, p.y, 2. );//f7f7f7
         }
-        //mapPlot.drawRectBorder();
-    }
+    }*/
     public function finished(){
         parseCSV();
         trace('Animating UK data');
-        drawGraph();
+        //drawGraph();
         AnimateTimer.create();
         AnimateTimer.onFrame = render;
     }
@@ -160,7 +161,7 @@ class Main {
         stat19Arr      = parseData( 'covid-19-cases-uk.csv' );
         area9Arr       = parseData( 'E_areas.csv' );
         additionalArr  = parseData( 'latLongAdditional.csv' );
-        citiesArr      = parseData( 'SomeCities.csv' );
+        /*citiesArr      = parseData( 'SomeCities.csv' );*/
     }
     function parseData( fileNom: String ): Array<Array<String>> {
         var str         = textLoader.contents.get( fileNom );
