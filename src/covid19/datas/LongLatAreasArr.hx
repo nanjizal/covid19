@@ -1,5 +1,5 @@
 package covid19.datas;
-import covid19.geo.EastNorth;
+import latLongUK.EastNorth;
 @:forward
 abstract LongLatAreasArr( Array<LongLatAreas> ) from Array<LongLatAreas> to Array<LongLatAreas> {
     public inline

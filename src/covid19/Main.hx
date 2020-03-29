@@ -14,8 +14,8 @@ import covid19.datas.AddLatLongArr;
 import covid19.datas.City;
 import covid19.datas.CityArr;
 import covid19.datas.DayCounter;
-import covid19.geo.LongLatUK;
-import covid19.geo.EastNorth;
+//import latLongUK.LatLongUK;
+import latLongUK.EastNorth;
 import covid19.visual.UKcanvasPlot;
 import datetime.DateTime;
 import htmlHelper.tools.DivertTrace;
@@ -23,6 +23,7 @@ import htmlHelper.canvas.CanvasWrapper;
 import htmlHelper.canvas.Surface;
 import pallette.ColorWheel24;
 import uk.CanvasUK;
+import latLongUK.LatLongUK;
 import js.Browser;
 // sources... 
 // https://github.com/tomwhite/covid-19-uk-data/blob/master/data/covid-19-cases-uk.csv
@@ -59,13 +60,7 @@ class Main {
         canvas.height = 768;
         Browser.document.body.appendChild( cast canvas );
         surface = new Surface({ x: 10, y: 10, me: canvas.getContext2d() });
-        var uk = new CanvasUK( surface );
-        uk.dx = 28;
-        uk.dy = 47;
-        uk.alpha = 0.7;
-        uk.scaleY = 0.975;
-        uk.scaleX = 1.04;
-        uk.draw();
+        vectorUK();
         mapPlot = new UKcanvasPlot( surface );
         mapPlot.plotGrid();
         textLoader = new TextLoader( ['../data/postcodeAdmin.csv'
@@ -74,7 +69,19 @@ class Main {
                                      ,'../data/SomeCities.csv'
                                      , csvStats ], finished );
     }
-    public function drawGraph(){
+    public
+    function vectorUK(){
+        // likely fairly approximate
+        var uk = new CanvasUK( surface );
+        uk.dx = 28;
+        uk.dy = 47;
+        uk.alpha = 0.7;
+        uk.scaleY = 0.975;
+        uk.scaleX = 1.04;
+        uk.draw();
+    }
+    public
+    function drawGraph(){
         for( i in 0...citiesArr.length ){
             var city = citiesArr[ i ];
             var p = mapPlot.toXY( city.east, city.north );

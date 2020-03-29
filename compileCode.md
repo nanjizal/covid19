@@ -13,8 +13,17 @@ once installed you need to setup haxelib ( set path for library, default is fine
 `haxelib git datetime https://github.com/RealyUniqueName/DateTime.git 
   
 **htmlHelper** my library for setting up html visuals and processing csv's could be used for WebGL  
-render.   
+render.  
 `haxelib git htmlHelper https://github.com/nanjizal/htmlHelper.git`  
+  
+**uk** my library for providing an outline of UK  
+`haxelib git uk http://github.com/nanjizal/uk.git`  
+  
+**latLongUK** my library for providng latitude and longitude to ordnance survey conversion.  
+`haxelib git latLongUK http://github.com/nanjizal/latLongUK.git`  
+  
+**pallette** my library for providing colors  
+`haxelib git pallette http://github.com/nanjizal/pallette.git`  
   
 get the **covid19** github source  
 `git clone https://github.com/nanjizal/covid19.git`  
@@ -27,10 +36,6 @@ from terminal get haxe to compile the code:
   
 the index will be in the **bin** folder to run locally you need to adjust firefox to allow local files to run ( so it will load csv data ), or setup a local server or put online.
 
-Currently I am just showing **March 13** by choice, you can easily manually adjust the if statement. Some data is probably not rendered - rather experimental test.
   
 You can see it running here:
-[https://nanjizal.github.io/covid19/bin/index.html?test1](https://nanjizal.github.io/covid19/bin/index.html?test1)
-
-visual here:
-<img width="1156" alt="covid19" src="https://user-images.githubusercontent.com/20134338/76690769-8513ea80-663b-11ea-9fc8-e99e8bb4d8ec.png">
+[https://nanjizal.github.io/covid19/bin/index.html?test5](https://nanjizal.github.io/covid19/bin/index.html?test5)

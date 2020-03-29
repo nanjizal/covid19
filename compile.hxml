@@ -6,6 +6,7 @@
 -lib datetime
 -lib pallette
 -lib uk
+-lib latLongUK
 -main covid19.Main
 #-D no-inline
 -D js-flatten 

@@ -210,141 +210,132 @@ var covid19_Main = function() {
 	window.document.body.appendChild(canvas1);
 	var this2 = new htmlHelper_canvas_CanvasPlus(canvas1.getContext("2d",null),10,10);
 	this.surface = this2;
-	var uk1 = new uk_CanvasUK(this.surface);
-	uk1.dx = 28;
-	uk1.dy = 47;
-	uk1.alpha = 0.7;
-	uk1.scaleY = 0.975;
-	uk1.scaleX = 1.04;
-	uk1.draw();
+	this.vectorUK();
 	this.mapPlot = new covid19_visual_UKcanvasPlot(this.surface);
 	var _this = this.mapPlot;
-	var this3 = _this.surface;
-	var r = 0;
-	var g = 0;
-	var b = 255;
-	this3.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + 0. + ")";
-	this3.me.beginPath();
-	var this4 = _this.surface;
-	this4.me.lineWidth = 1.;
-	var r1 = 12;
-	var g1 = 12;
-	var b1 = 240;
-	this4.me.strokeStyle = "rgba(" + r1 + "," + g1 + "," + b1 + "," + 0.2 + ")";
-	var minLat = 49;
-	var maxLat = 60;
-	var minLong = -9;
-	var maxLong = 2;
-	var _g = minLat;
-	var _g1 = maxLat;
+	var this3 = _this.plotting;
+	var arr = [];
+	var count = 0;
+	var tempCount = 0;
+	var _g = 49;
+	var _g1 = 60;
 	while(_g < _g1) {
 		var lat = _g++;
 		if((lat + 1) % 2 == 0) {
 			continue;
 		}
-		var val = _this.ll.ll_to_osOld(lat,minLong);
-		var v = val;
-		var xy_x = v.east * _this.scale + 100 + _this.dx;
-		var xy_y = 500 - v.north * _this.scale + _this.dy;
-		var this5 = _this.surface;
-		var x = xy_x;
-		var y = xy_y;
-		this5.x = x;
-		this5.y = y;
-		this5.me.moveTo(x,y);
-		var _g2 = minLong;
-		var _g11 = maxLong;
+		var temp = [];
+		tempCount = 1;
+		var sp = new latLongUK_LatLong(lat,-9);
+		var en = latLongUK_LatLongUK.ll_to_osOld(sp);
+		var this4 = en;
+		var flat = this4;
+		temp[0] = new latLongUK_helpers_XY(flat.east * this3.scale + this3.dx,this3.negY - flat.north * this3.scale + this3.dy);
+		var _g2 = -9;
+		var _g11 = 2;
 		while(_g2 < _g11) {
 			var long = _g2++;
-			var val1 = _this.ll.ll_to_osOld(lat,long);
-			var v1 = val1;
-			var xy_x1 = v1.east * _this.scale + 100 + _this.dx;
-			var xy_y1 = 500 - v1.north * _this.scale + _this.dy;
-			var this6 = _this.surface;
-			var x1 = xy_x1;
-			var y1 = xy_y1;
-			this6.x = x1;
-			this6.y = y1;
-			this6.me.lineTo(x1,y1);
-			var val2 = _this.ll.ll_to_osOld(lat,long + 0.25);
-			var v2 = val2;
-			var xy_x2 = v2.east * _this.scale + 100 + _this.dx;
-			var xy_y2 = 500 - v2.north * _this.scale + _this.dy;
-			var this7 = _this.surface;
-			var x2 = xy_x2;
-			var y2 = xy_y2;
-			this7.x = x2;
-			this7.y = y2;
-			this7.me.lineTo(x2,y2);
-			var val3 = _this.ll.ll_to_osOld(lat,long + 0.5);
-			var v3 = val3;
-			var xy_x3 = v3.east * _this.scale + 100 + _this.dx;
-			var xy_y3 = 500 - v3.north * _this.scale + _this.dy;
-			var this8 = _this.surface;
-			var x3 = xy_x3;
-			var y3 = xy_y3;
-			this8.x = x3;
-			this8.y = y3;
-			this8.me.lineTo(x3,y3);
-			var val4 = _this.ll.ll_to_osOld(lat,long + 0.75);
-			var v4 = val4;
-			var xy_x4 = v4.east * _this.scale + 100 + _this.dx;
-			var xy_y4 = 500 - v4.north * _this.scale + _this.dy;
-			var this9 = _this.surface;
-			var x4 = xy_x4;
-			var y4 = xy_y4;
-			this9.x = x4;
-			this9.y = y4;
-			this9.me.lineTo(x4,y4);
+			var sp1 = new latLongUK_LatLong(lat,long);
+			var en1 = latLongUK_LatLongUK.ll_to_osOld(sp1);
+			var this5 = en1;
+			var flat1 = this5;
+			temp[tempCount++] = new latLongUK_helpers_XY(flat1.east * this3.scale + this3.dx,this3.negY - flat1.north * this3.scale + this3.dy);
+			var sp2 = new latLongUK_LatLong(lat,long + 0.25);
+			var en2 = latLongUK_LatLongUK.ll_to_osOld(sp2);
+			var this6 = en2;
+			var flat2 = this6;
+			temp[tempCount++] = new latLongUK_helpers_XY(flat2.east * this3.scale + this3.dx,this3.negY - flat2.north * this3.scale + this3.dy);
+			var sp3 = new latLongUK_LatLong(lat,long + 0.5);
+			var en3 = latLongUK_LatLongUK.ll_to_osOld(sp3);
+			var this7 = en3;
+			var flat3 = this7;
+			temp[tempCount++] = new latLongUK_helpers_XY(flat3.east * this3.scale + this3.dx,this3.negY - flat3.north * this3.scale + this3.dy);
+			var sp4 = new latLongUK_LatLong(lat,long + 0.75);
+			var en4 = latLongUK_LatLongUK.ll_to_osOld(sp4);
+			var this8 = en4;
+			var flat4 = this8;
+			temp[tempCount++] = new latLongUK_helpers_XY(flat4.east * this3.scale + this3.dx,this3.negY - flat4.north * this3.scale + this3.dy);
 		}
-		var val5 = _this.ll.ll_to_osOld(lat,maxLong + 1.);
-		var v5 = val5;
-		var xy_x5 = v5.east * _this.scale + 100 + _this.dx;
-		var xy_y5 = 500 - v5.north * _this.scale + _this.dy;
-		var this10 = _this.surface;
-		var x5 = xy_x5;
-		var y5 = xy_y5;
-		this10.x = x5;
-		this10.y = y5;
-		this10.me.lineTo(x5,y5);
+		var sp5 = new latLongUK_LatLong(lat,3);
+		var en5 = latLongUK_LatLongUK.ll_to_osOld(sp5);
+		var this9 = en5;
+		var flat5 = this9;
+		temp[tempCount++] = new latLongUK_helpers_XY(flat5.east * this3.scale + this3.dx,this3.negY - flat5.north * this3.scale + this3.dy);
+		arr[count++] = temp;
 	}
-	var _g21 = minLong;
-	var _g3 = maxLong + 2;
+	var _g21 = -9;
+	var _g3 = 4;
 	while(_g21 < _g3) {
 		var long1 = _g21++;
 		if((long1 + 1) % 2 == 0) {
 			continue;
 		}
-		var val6 = _this.ll.ll_to_osOld(minLat,long1);
-		var v6 = val6;
-		var xy_x6 = v6.east * _this.scale + 100 + _this.dx;
-		var xy_y6 = 500 - v6.north * _this.scale + _this.dy;
-		var this11 = _this.surface;
-		var x6 = xy_x6;
-		var y6 = xy_y6;
-		this11.x = x6;
-		this11.y = y6;
-		this11.me.moveTo(x6,y6);
-		var _g22 = minLat;
-		var _g31 = maxLat;
+		var temp1 = [];
+		tempCount = 1;
+		var sp6 = new latLongUK_LatLong(49,long1);
+		var en6 = latLongUK_LatLongUK.ll_to_osOld(sp6);
+		var this10 = en6;
+		var flat6 = this10;
+		temp1[0] = new latLongUK_helpers_XY(flat6.east * this3.scale + this3.dx,this3.negY - flat6.north * this3.scale + this3.dy);
+		var _g22 = 49;
+		var _g31 = 60;
 		while(_g22 < _g31) {
 			var lat1 = _g22++;
-			var val7 = _this.ll.ll_to_osOld(lat1,long1);
-			var v7 = val7;
-			var xy_x7 = v7.east * _this.scale + 100 + _this.dx;
-			var xy_y7 = 500 - v7.north * _this.scale + _this.dy;
-			var this12 = _this.surface;
-			var x7 = xy_x7;
-			var y7 = xy_y7;
-			this12.x = x7;
-			this12.y = y7;
-			this12.me.lineTo(x7,y7);
+			var sp7 = new latLongUK_LatLong(lat1,long1);
+			var en7 = latLongUK_LatLongUK.ll_to_osOld(sp7);
+			var this11 = en7;
+			var flat7 = this11;
+			temp1[tempCount++] = new latLongUK_helpers_XY(flat7.east * this3.scale + this3.dx,this3.negY - flat7.north * this3.scale + this3.dy);
+		}
+		arr[count++] = temp1;
+	}
+	var lines = arr;
+	var this12 = _this.surface;
+	var r = 0;
+	var g = 0;
+	var b = 255;
+	this12.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + 0. + ")";
+	this12.me.beginPath();
+	var this13 = _this.surface;
+	this13.me.lineWidth = 1.;
+	var r1 = 12;
+	var g1 = 12;
+	var b1 = 240;
+	this13.me.strokeStyle = "rgba(" + r1 + "," + g1 + "," + b1 + "," + 0.2 + ")";
+	var no = lines.length;
+	var line;
+	var len;
+	var point;
+	var _g4 = 0;
+	var _g12 = no;
+	while(_g4 < _g12) {
+		var i = _g4++;
+		line = lines[i];
+		len = line.length;
+		point = line[0];
+		var this14 = _this.surface;
+		var x = point.x;
+		var y = point.y;
+		this14.x = x;
+		this14.y = y;
+		this14.me.moveTo(x,y);
+		var _g5 = 1;
+		var _g13 = len;
+		while(_g5 < _g13) {
+			var j = _g5++;
+			point = line[j];
+			var this15 = _this.surface;
+			var x1 = point.x;
+			var y1 = point.y;
+			this15.x = x1;
+			this15.y = y1;
+			this15.me.lineTo(x1,y1);
 		}
 	}
-	var this13 = _this.surface;
-	this13.me.stroke();
-	this13.me.closePath();
-	this13.me.fill();
+	var this16 = _this.surface;
+	this16.me.stroke();
+	this16.me.closePath();
+	this16.me.fill();
 	this.textLoader = new htmlHelper_tools_TextLoader(["../data/postcodeAdmin.csv","../data/E_areas.csv","../data/latLongAdditional.csv","../data/SomeCities.csv",this.csvStats],$bind(this,this.finished));
 };
 covid19_Main.__name__ = true;
@@ -352,7 +343,16 @@ covid19_Main.main = function() {
 	new covid19_Main();
 };
 covid19_Main.prototype = {
-	drawGraph: function() {
+	vectorUK: function() {
+		var uk1 = new uk_CanvasUK(this.surface);
+		uk1.dx = 28;
+		uk1.dy = 47;
+		uk1.alpha = 0.7;
+		uk1.scaleY = 0.975;
+		uk1.scaleX = 1.04;
+		uk1.draw();
+	}
+	,drawGraph: function() {
 		var _g = 0;
 		var _g1 = this.citiesArr.length;
 		while(_g < _g1) {
@@ -415,7 +415,7 @@ covid19_Main.prototype = {
 	}
 	,finished: function() {
 		this.parseCSV();
-		haxe_Log.trace("Animating UK data",{ fileName : "src/covid19/Main.hx", lineNumber : 87, className : "covid19.Main", methodName : "finished"});
+		haxe_Log.trace("Animating UK data",{ fileName : "src/covid19/Main.hx", lineNumber : 94, className : "covid19.Main", methodName : "finished"});
 		this.drawGraph();
 		if(htmlHelper_tools_AnimateTimer.s == null) {
 			htmlHelper_tools_AnimateTimer.s = window.document.createElement("style");
@@ -463,7 +463,7 @@ covid19_Main.prototype = {
 			var this1 = this.additionalArr;
 			var area = stat.area;
 			var found = false;
-			var eastNorth = new covid19_geo_EastNorth(0.,0.);
+			var eastNorth = new latLongUK_EastNorth(0.,0.);
 			var _g2 = 0;
 			while(_g2 < this1.length) {
 				var pos = this1[_g2];
@@ -480,7 +480,7 @@ covid19_Main.prototype = {
 				var this2 = this.longLatArr;
 				var area1 = stat.area;
 				var found1 = false;
-				var eastNorth2 = new covid19_geo_EastNorth(0.,0.);
+				var eastNorth2 = new latLongUK_EastNorth(0.,0.);
 				var _g3 = 0;
 				while(_g3 < this2.length) {
 					var pos1 = this2[_g3];
@@ -559,7 +559,7 @@ covid19_Main.prototype = {
 					var area2 = __map_reserved[str2] != null ? _this1.getReserved(str2) : _this1.h[str2];
 					var this5 = this.longLatArr;
 					var found2 = false;
-					var eastNorth3 = new covid19_geo_EastNorth(0.,0.);
+					var eastNorth3 = new latLongUK_EastNorth(0.,0.);
 					var _g6 = 0;
 					while(_g6 < this5.length) {
 						var pos4 = this5[_g6];
@@ -631,7 +631,7 @@ covid19_Main.prototype = {
 			this.currentStr = str;
 		} else {
 			this.divertTrace.traceString = "";
-			haxe_Log.trace(this.unplotted + "<br>-plotted<br>" + this.currentStr + this.lastStr,{ fileName : "src/covid19/Main.hx", lineNumber : 130, className : "covid19.Main", methodName : "renderDate"});
+			haxe_Log.trace(this.unplotted + "<br>-plotted<br>" + this.currentStr + this.lastStr,{ fileName : "src/covid19/Main.hx", lineNumber : 137, className : "covid19.Main", methodName : "renderDate"});
 			htmlHelper_tools_AnimateTimer.onFrame = function(i3) {
 			};
 		}
@@ -644,10 +644,8 @@ covid19_Main.prototype = {
 		while(_g < _g1) {
 			var i = _g++;
 			var arr1 = arr[i];
-			var ll = new covid19_geo_LongLatUK();
 			var toFloat = Std.parseFloat;
-			var val = ll.ll_to_osOld(toFloat(arr1[2]),toFloat(arr1[3]));
-			ll = null;
+			var val = latLongUK_LatLongUK.ll_to_osOld(new latLongUK_LatLong(toFloat(arr1[2]),toFloat(arr1[3])));
 			var val1 = val;
 			var this1 = new covid19_datas_InternalLongLatAreas(StringTools.trim(arr1[0]),StringTools.trim(arr1[1]),parseFloat(arr1[2]),parseFloat(arr1[3]),Std.parseInt(arr1[4]),Std.parseInt(arr1[5]),Std.parseInt(arr1[6]),Std.parseInt(arr1[7]),val1.east,val1.north);
 			arrLL[i] = this1;
@@ -713,10 +711,8 @@ covid19_Main.prototype = {
 		while(_g4 < _g13) {
 			var i3 = _g4++;
 			var arr7 = arr6[i3];
-			var ll1 = new covid19_geo_LongLatUK();
 			var toFloat1 = Std.parseFloat;
-			var val2 = ll1.ll_to_osOld(toFloat1(arr7[2]),toFloat1(arr7[3]));
-			ll1 = null;
+			var val2 = latLongUK_LatLongUK.ll_to_osOld(new latLongUK_LatLong(toFloat1(arr7[2]),toFloat1(arr7[3])));
 			var val3 = val2;
 			var this7 = new covid19_datas_InternalAddLatLong(StringTools.trim(arr7[0]),StringTools.trim(arr7[1]),parseFloat(arr7[2]),parseFloat(arr7[3]),val3.east,val3.north);
 			arrAL[i3] = this7;
@@ -730,10 +726,8 @@ covid19_Main.prototype = {
 		while(_g5 < _g14) {
 			var i4 = _g5++;
 			var arr10 = arr8[i4];
-			var ll2 = new covid19_geo_LongLatUK();
 			var toFloat2 = Std.parseFloat;
-			var val4 = ll2.ll_to_osOld(toFloat2(arr10[1]),toFloat2(arr10[2]));
-			ll2 = null;
+			var val4 = latLongUK_LatLongUK.ll_to_osOld(new latLongUK_LatLong(toFloat2(arr10[2]),toFloat2(arr10[3])));
 			var val5 = val4;
 			var this9 = new covid19_datas_InternalCity(StringTools.trim(arr10[0]),"",parseFloat(arr10[1]),parseFloat(arr10[2]),val5.east,val5.north);
 			arrC[i4] = this9;
@@ -859,63 +853,6 @@ covid19_datas__$StatsC19Arr_StatsC19Arr_$Impl_$.getByDate = function(this1,dayCo
 	}
 	return arr;
 };
-var covid19_geo_EastNorth = function(east,north) {
-	this.east = east;
-	this.north = north;
-};
-covid19_geo_EastNorth.__name__ = true;
-var covid19_geo_LongLatUK = function() {
-	this.lambda0 = -2 * Math.PI / 180;
-	this.phi0 = 49 * Math.PI / 180;
-	this.f0 = 0.9996012717;
-	this.e0 = 400000.;
-	this.n0 = -100000.;
-	this.osgb36_b = 6356256.909;
-	this.osgb36_a = 6377563.396;
-};
-covid19_geo_LongLatUK.__name__ = true;
-covid19_geo_LongLatUK.prototype = {
-	fM: function(phi,a,b) {
-		var n = (a - b) / (a + b);
-		var n2 = Math.pow(n,2);
-		var n3 = n * n2;
-		var dphi = phi - this.phi0;
-		var sphi = phi + this.phi0;
-		return b * this.f0 * ((1 + n + 1.25 * (n2 + n3)) * dphi - (3 * n + 3 * n2 + 2.625 * n3) * Math.sin(dphi) * Math.cos(sphi) + 1.875 * (n2 + n3) * Math.sin(2 * dphi) * Math.cos(2 * sphi) - 1.45833333333333326 * n3 * Math.sin(3 * dphi) * Math.cos(3 * sphi));
-	}
-	,ll_to_osOld: function(phi,lam) {
-		return this.ll_to_os(phi,lam,this.osgb36_a,this.osgb36_b);
-	}
-	,ll_to_os: function(phi,lam,a,b) {
-		var phi1 = phi * Math.PI / 180;
-		var lam1 = lam * Math.PI / 180;
-		var a2 = Math.pow(a,2);
-		var e2 = (a2 - Math.pow(b,2)) / a2;
-		var rho = a * this.f0 * (1 - e2) * Math.pow(1 - Math.pow(e2 * Math.sin(phi1),2),-1.5);
-		var nu = a * this.f0 / Math.sqrt(1 - e2 * Math.pow(Math.sin(phi1),2));
-		var eta2 = nu / rho - 1;
-		var m = this.fM(phi1,a,b);
-		var sin_phi = Math.sin(phi1);
-		var cos_phi = Math.cos(phi1);
-		var cos_phi2 = Math.pow(cos_phi,2);
-		var cos_phi3 = cos_phi2 * cos_phi;
-		var cos_phi5 = cos_phi3 * cos_phi2;
-		var tan_phi2 = Math.pow(Math.tan(phi1),2);
-		var tan_phi4 = tan_phi2 * tan_phi2;
-		var a1 = m + this.n0;
-		var a21 = nu / 2 * sin_phi * cos_phi;
-		var a3 = nu / 24 * sin_phi * cos_phi3 * (5 - tan_phi2 + 9 * eta2);
-		var a4 = nu / 720 * sin_phi * cos_phi5 * (61 - 58 * tan_phi2 + tan_phi4);
-		var b1 = nu * cos_phi;
-		var b2 = nu / 6 * cos_phi3 * (nu / rho - tan_phi2);
-		var b3 = nu / 120 * cos_phi5 * (5 - 18 * tan_phi2 + tan_phi4 + eta2 * (14 - 58 * tan_phi2));
-		var lml0 = lam1 - this.lambda0;
-		var lml02 = Math.pow(lml0,2);
-		var n = a1 + lml02 * (a21 + lml02 * (a3 + a4 * lml02));
-		var e = this.e0 + lml0 * (b1 + lml02 * (b2 + b3 * lml02));
-		return new covid19_geo_EastNorth(e,n);
-	}
-};
 var covid19_visual_UKcanvasPlot = function(surface) {
 	this.colorChange = 0.0454545454545454558;
 	this.sizeScale = 0.0555555555555555525;
@@ -923,43 +860,44 @@ var covid19_visual_UKcanvasPlot = function(surface) {
 	this.alpha = 0.3;
 	this.dy = 60.;
 	this.dx = -57.;
-	this.ll = new covid19_geo_LongLatUK();
 	this.surface = surface;
+	var this1 = new latLongUK_helpers_InternalPlot(0.0005,53.,60.,500);
+	this.plotting = this1;
 };
 covid19_visual_UKcanvasPlot.__name__ = true;
 covid19_visual_UKcanvasPlot.prototype = {
 	plot: function(eastNorth,cases,colors) {
 		var size = cases * this.sizeScale;
 		var fillColor = colors[Math.round(cases * this.colorChange)];
-		var p_x = eastNorth.east * this.scale + 100 + this.dx;
-		var p_y = 500 - eastNorth.north * this.scale + this.dy;
+		var this1 = this.plotting;
+		var p = new latLongUK_helpers_XY(eastNorth.east * this1.scale + this1.dx,this1.negY - eastNorth.north * this1.scale + this1.dy);
 		var radius = size * 0.5;
 		var fillAlpha = this.alpha;
-		var ax = p_x;
-		var ay = p_y;
+		var ax = p.x;
+		var ay = p.y;
 		var theta = Math.PI / 2;
 		var step = Math.PI * 2 / 36;
 		var bx;
 		var by;
 		var cx;
 		var cy;
-		var this1 = this.surface;
+		var this2 = this.surface;
 		if(fillAlpha != null && fillAlpha != 1.0) {
 			var r = fillColor >> 16 & 255;
 			var g = fillColor >> 8 & 255;
 			var b = fillColor & 255;
-			this1.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + fillAlpha + ")";
+			this2.me.fillStyle = "rgba(" + r + "," + g + "," + b + "," + fillAlpha + ")";
 		} else {
 			var tmp = StringTools.hex(fillColor,6);
-			this1.me.fillStyle = "#" + tmp;
+			this2.me.fillStyle = "#" + tmp;
 		}
-		this1.me.beginPath();
-		var this2 = this.surface;
-		this2.me.lineWidth = 2.;
+		this2.me.beginPath();
+		var this3 = this.surface;
+		this3.me.lineWidth = 2.;
 		var r1 = 255;
 		var g1 = 165;
 		var b1 = 0;
-		this2.me.strokeStyle = "rgba(" + r1 + "," + g1 + "," + b1 + "," + 0. + ")";
+		this3.me.strokeStyle = "rgba(" + r1 + "," + g1 + "," + b1 + "," + 0. + ")";
 		var _g = 0;
 		while(_g < 36) {
 			var i = _g++;
@@ -968,27 +906,27 @@ covid19_visual_UKcanvasPlot.prototype = {
 			theta += step;
 			cx = ax + radius * Math.sin(theta);
 			cy = ay + radius * Math.cos(theta);
-			var this3 = this.surface;
-			this3.x = ax;
-			this3.y = ay;
-			this3.me.moveTo(ax,ay);
 			var this4 = this.surface;
-			this4.x = bx;
-			this4.y = by;
-			this4.me.lineTo(bx,by);
+			this4.x = ax;
+			this4.y = ay;
+			this4.me.moveTo(ax,ay);
 			var this5 = this.surface;
-			this5.x = cx;
-			this5.y = cy;
-			this5.me.lineTo(cx,cy);
+			this5.x = bx;
+			this5.y = by;
+			this5.me.lineTo(bx,by);
 			var this6 = this.surface;
-			this6.x = ax;
-			this6.y = ay;
-			this6.me.lineTo(ax,ay);
+			this6.x = cx;
+			this6.y = cy;
+			this6.me.lineTo(cx,cy);
+			var this7 = this.surface;
+			this7.x = ax;
+			this7.y = ay;
+			this7.me.lineTo(ax,ay);
 		}
-		var this7 = this.surface;
-		this7.me.stroke();
-		this7.me.closePath();
-		this7.me.fill();
+		var this8 = this.surface;
+		this8.me.stroke();
+		this8.me.closePath();
+		this8.me.fill();
 	}
 };
 var datetime__$DateTime_DateTime_$Impl_$ = {};
@@ -1788,6 +1726,67 @@ js_Browser.createXMLHttpRequest = function() {
 js_Browser.alert = function(v) {
 	window.alert(Std.string(v));
 };
+var latLongUK_EastNorth = function(east,north) {
+	this.east = east;
+	this.north = north;
+};
+latLongUK_EastNorth.__name__ = true;
+var latLongUK_LatLong = function(lat,long) {
+	this.lat = lat;
+	this.long = long;
+};
+latLongUK_LatLong.__name__ = true;
+var latLongUK_LatLongUK = function() { };
+latLongUK_LatLongUK.__name__ = true;
+latLongUK_LatLongUK.ll_to_osOld = function(latLong) {
+	return latLongUK_LatLongUK.ll_to_os(latLong,6377563.396,6356256.909);
+};
+latLongUK_LatLongUK.ll_to_os = function(latLong,a,b) {
+	var phi = latLong.lat * Math.PI / 180;
+	var lam = latLong.long * Math.PI / 180;
+	var a2 = Math.pow(a,2);
+	var e2 = (a2 - Math.pow(b,2)) / a2;
+	var rho = a * 0.9996012717 * (1 - e2) * Math.pow(1 - Math.pow(e2 * Math.sin(phi),2),-1.5);
+	var nu = a * 0.9996012717 / Math.sqrt(1 - e2 * Math.pow(Math.sin(phi),2));
+	var eta2 = nu / rho - 1;
+	var n = (a - b) / (a + b);
+	var n2 = Math.pow(n,2);
+	var n3 = n * n2;
+	var dphi = phi - latLongUK_LatLongUK.phi0;
+	var sphi = phi + latLongUK_LatLongUK.phi0;
+	var m = b * 0.9996012717 * ((1 + n + 1.25 * (n2 + n3)) * dphi - (3 * n + 3 * n2 + 2.625 * n3) * Math.sin(dphi) * Math.cos(sphi) + 1.875 * (n2 + n3) * Math.sin(2 * dphi) * Math.cos(2 * sphi) - 1.45833333333333326 * n3 * Math.sin(3 * dphi) * Math.cos(3 * sphi));
+	var sin_phi = Math.sin(phi);
+	var cos_phi = Math.cos(phi);
+	var cos_phi2 = Math.pow(cos_phi,2);
+	var cos_phi3 = cos_phi2 * cos_phi;
+	var cos_phi5 = cos_phi3 * cos_phi2;
+	var tan_phi2 = Math.pow(Math.tan(phi),2);
+	var tan_phi4 = tan_phi2 * tan_phi2;
+	var a1 = m + (-100000.);
+	var a21 = nu / 2 * sin_phi * cos_phi;
+	var a3 = nu / 24 * sin_phi * cos_phi3 * (5 - tan_phi2 + 9 * eta2);
+	var a4 = nu / 720 * sin_phi * cos_phi5 * (61 - 58 * tan_phi2 + tan_phi4);
+	var b1 = nu * cos_phi;
+	var b2 = nu / 6 * cos_phi3 * (nu / rho - tan_phi2);
+	var b3 = nu / 120 * cos_phi5 * (5 - 18 * tan_phi2 + tan_phi4 + eta2 * (14 - 58 * tan_phi2));
+	var lml0 = lam - latLongUK_LatLongUK.lambda0;
+	var lml02 = Math.pow(lml0,2);
+	var n1 = a1 + lml02 * (a21 + lml02 * (a3 + a4 * lml02));
+	var e = 400000. + lml0 * (b1 + lml02 * (b2 + b3 * lml02));
+	return new latLongUK_EastNorth(e,n1);
+};
+var latLongUK_helpers_InternalPlot = function(scale,dx,dy,negY) {
+	this.scale = scale;
+	this.dx = dx;
+	this.dy = dy;
+	this.negY = negY;
+};
+latLongUK_helpers_InternalPlot.__name__ = true;
+var latLongUK_helpers_XY = function(x,y) {
+	this.x = x;
+	this.y = y;
+};
+latLongUK_helpers_XY.__name__ = true;
 var uk_CanvasUK = function(surface) {
 	this.alpha = 1.;
 	this.scaleY = 1.;
@@ -1929,6 +1928,8 @@ Object.defineProperty(js__$Boot_HaxeError.prototype,"message",{ get : function()
 }});
 js_Boot.__toStr = ({ }).toString;
 htmlHelper_tools_AnimateTimer.counter = 0;
+latLongUK_LatLongUK.phi0 = 49 * Math.PI / 180;
+latLongUK_LatLongUK.lambda0 = -2 * Math.PI / 180;
 uk_UK.shape1 = [46.9,497.5,47.0,496.1,46.9,496.1,44.5,494.4,44.5,494.4,39.1,490.2,39.0,490.4,38.0,489.2,38.0,489.1,37.9,487.9,36.3,487.8,35.3,486.6,35.2,486.6,34.2,486.8,34.0,487.1,33.4,486.9,33.4,486.6,33.1,485.9,33.0,485.9,32.0,485.7,32.0,485.6,30.2,484.4,29.1,484.4,28.8,483.2,28.0,482.8,28.1,482.1,28.2,482.1,28.9,480.4,28.9,480.2,30.4,478.2,28.4,479.3,28.3,479.5,27.6,480.1,26.9,481.7,26.1,481.8,25.9,480.8,25.9,480.7,26.4,479.1,26.5,479.0,26.4,478.1,26.1,478.1,25.4,478.4,24.6,478.4,24.6,478.5,24.4,479.8,24.0,479.8,23.5,478.8,22.8,478.8,22.7,478.8,22.5,479.4,22.4,479.4,21.6,479.3,21.6,479.4,21.6,480.1,20.9,479.9,20.3,478.7,20.3,478.6,20.1,477.1,20.2,476.9,20.4,476.2,20.7,476.4,20.9,476.2,20.4,476.2,18.6,476.2,18.5,476.0,18.9,474.9,18.8,474.9,18.4,473.9,17.6,473.1,17.6,472.8,17.8,471.9,18.4,471.4,18.8,469.1,19.2,468.4,19.6,468.2,19.8,468.0,20.2,467.8,20.8,466.2,20.9,466.2,20.6,465.6,19.6,465.9,19.3,465.8,18.9,466.6,18.4,466.9,18.3,466.9,17.0,467.0,16.4,466.1,16.8,464.9,18.1,464.7,18.6,463.4,19.1,463.5,19.2,463.5,19.6,462.3,19.6,462.1,20.2,462.1,20.2,461.9,20.9,461.2,23.1,461.2,23.1,461.4,24.8,460.9,24.7,460.7,27.1,459.8,27.0,459.5,27.6,458.4,26.8,458.1,26.1,458.7,24.8,458.4,24.7,458.6,23.6,457.9,23.4,457.2,23.4,457.2,24.8,456.4,25.4,456.2,25.3,455.9,23.4,455.8,23.2,456.1,22.1,455.4,21.9,455.1,21.8,454.4,21.4,454.2,21.2,454.1,20.2,452.4,19.9,452.4,19.9,454.1,19.1,454.4,17.9,454.1,17.9,454.1,17.8,452.9,17.9,452.6,19.0,452.1,20.2,450.4,23.2,446.9,23.4,446.9,23.9,447.7,23.9,447.8,26.4,450.1,27.2,451.9,28.1,452.1,29.8,452.1,29.4,453.2,30.4,452.9,31.2,453.1,31.4,454.4,29.9,455.8,28.9,456.6,29.1,457.6,30.2,457.2,30.2,457.1,31.8,457.0,31.9,456.9,32.2,455.8,33.1,454.8,34.0,454.8,34.4,455.2,34.5,456.1,33.5,456.6,33.6,457.8,32.8,458.5,32.5,458.9,32.6,459.0,33.5,459.0,30.8,463.8,31.1,464.0,31.1,463.9,34.1,459.4,35.7,458.8,34.5,461.4,36.5,458.9,37.0,458.9,37.2,459.1,38.1,459.2,37.9,460.3,38.9,459.8,40.4,460.4,40.5,461.6,40.9,461.6,40.9,461.9,41.0,463.7,41.1,463.9,42.0,464.3,42.0,464.4,42.5,464.2,43.7,464.8,43.8,464.9,44.0,466.1,44.1,466.2,43.6,467.5,43.5,470.2,43.7,470.4,42.9,471.6,41.9,471.6,41.7,472.3,43.7,472.7,43.8,472.9,44.0,474.1,43.6,474.9,43.5,476.3,43.6,476.3,44.4,476.1,44.5,476.3,45.0,476.6,45.1,476.7,45.5,477.2,45.6,477.4,46.2,477.4,46.7,476.4,46.8,476.2,47.5,475.8,47.6,475.9,48.8,475.9,48.9,476.1,49.2,476.8,49.2,476.9,50.5,477.5,50.7,478.1,50.8,478.2,51.2,479.8,51.6,480.4,51.6,481.1,50.5,481.0,49.2,480.4,49.0,479.6,47.5,478.7,46.9,478.0,45.7,478.0,45.7,478.1,45.0,478.6,45.1,478.8,44.4,479.1,44.0,478.6,43.8,478.8,44.2,479.2,45.2,479.8,45.4,479.8,45.4,481.2,46.6,481.4,46.8,482.9,47.0,483.0,48.0,483.1,48.1,484.4,48.1,484.5,48.6,484.6,49.5,486.0,49.6,485.9,50.5,486.2,50.6,486.8,49.8,486.9,49.1,487.7,48.9,488.5,49.1,488.6,49.9,490.6,50.5,491.3,50.5,491.8,50.5,491.9,49.6,493.0,49.9,494.1,49.6,494.9,48.7,495.8,48.8,496.5,47.7,497.4,46.9,497.5];
 uk_UK.shape2 = [17.5,448.1,15.6,447.6,14.5,445.8,15.1,445.1,14.5,444.8,14.4,444.8,13.6,444.9,13.5,445.0,13.2,444.4,13.3,444.0,13.4,444.0,13.9,443.7,13.7,443.2,11.5,443.2,12.1,445.2,11.6,445.2,10.6,444.1,10.6,443.2,10.1,443.1,9.6,443.4,5.7,443.1,5.5,443.1,5.8,441.7,5.0,440.9,5.0,440.9,4.8,439.6,3.6,439.8,3.5,439.6,4.0,438.9,4.2,438.8,6.3,436.7,6.5,436.6,7.2,436.9,9.7,433.9,9.5,433.8,9.8,432.1,9.8,432.1,9.3,431.3,8.6,431.2,8.3,430.9,8.4,430.9,8.5,429.3,8.7,428.9,9.2,427.9,9.2,427.9,10.2,427.4,10.3,427.3,9.3,426.4,9.2,426.6,8.6,426.2,8.6,425.9,7.8,425.6,8.7,424.1,8.8,420.2,8.1,419.6,7.7,416.9,8.7,409.6,9.2,408.2,9.3,408.2,10.1,407.7,11.6,407.9,11.7,407.9,13.1,407.9,13.3,407.6,14.2,407.3,14.7,407.8,15.5,408.6,14.2,409.8,13.8,409.9,12.9,410.5,13.9,411.1,13.7,413.4,13.9,413.6,12.7,415.2,13.3,415.2,13.3,415.4,13.8,415.6,14.1,416.2,14.2,416.2,14.1,417.7,14.9,418.6,14.9,418.7,15.6,418.6,15.9,420.4,15.2,420.9,15.1,421.7,15.2,421.8,14.6,422.2,14.5,422.3,14.6,422.3,14.7,422.4,15.3,422.9,15.3,423.1,13.8,424.0,13.4,425.1,13.1,425.1,11.9,426.2,11.9,426.4,13.2,426.2,14.1,425.9,14.7,425.5,15.8,425.5,15.8,425.8,16.1,426.6,15.5,427.2,15.7,428.9,14.6,429.1,14.7,429.2,15.3,430.1,15.4,430.4,14.9,430.5,14.8,430.9,14.8,430.9,14.8,431.1,15.9,431.0,15.9,430.9,16.4,431.0,17.8,432.7,17.9,432.7,18.0,436.1,19.1,438.4,19.1,438.6,17.3,438.9,17.3,439.0,17.4,439.8,17.6,439.9,18.1,439.4,19.4,439.6,19.8,440.9,19.8,440.9,21.2,442.9,18.5,443.7,17.2,442.8,17.2,444.2,17.1,444.3,16.4,444.5,16.6,445.7,17.5,446.8,17.6,447.9,17.5,448.1];
 uk_UK.shape3 = [56.5,438.1,56.5,437.4,53.0,427.4,53.2,427.1,53.2,423.4,54.0,423.0,54.0,422.0,54.6,421.9,56.5,423.2,56.9,424.4,55.1,428.8,58.2,437.8,58.2,438.1,56.5,438.1];

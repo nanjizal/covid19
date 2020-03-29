@@ -1,5 +1,6 @@
 package covid19.datas;
-import covid19.geo.LongLatUK;
+import latLongUK.EastNorth;
+import latLongUK.LatLongUK;
 @:structInit
 class InternalCity {
     public var place:          String;
@@ -39,11 +40,9 @@ abstract City( InternalCity ) from InternalCity to InternalCity {
                           } );
     }
     public static inline
-    function toOScoordinates( arr: Array<String> ): { east: Float, north: Float }{
-        var ll = new LongLatUK();
+    function toOScoordinates( arr: Array<String> ): EastNorth {
         var toFloat =  Std.parseFloat;
-        var val = ll.ll_to_osOld( toFloat( arr[1] ), toFloat( arr[2] ) );
-        ll = null;
+        var val = LatLongUK.ll_to_osOld( { lat: toFloat( arr[2] ), long: toFloat( arr[3] ) } );
         return val;
     }
 }

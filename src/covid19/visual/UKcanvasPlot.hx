@@ -1,13 +1,14 @@
 package covid19.visual;
-import covid19.geo.EastNorth;
+import latLongUK.EastNorth;
 import htmlHelper.canvas.Surface;
-import covid19.geo.LongLatUK;
+import latLongUK.helpers.Plotting;
+import latLongUK.helpers.XY;
+import latLongUK.LatLongUK;
 class UKcanvasPlot {
     var minX        = 50.10319;
     var minY        = -7.64133;
     var maxX        = 60.15456;
     var maxY        = 1.75159;
-    var ll          = new LongLatUK();
     public var dx = -57.;
     public var dy = 60.;
     public var alpha       = 0.3;
@@ -15,8 +16,10 @@ class UKcanvasPlot {
     public var sizeScale   = ( 1/(1.8 * 10) );
     public var colorChange = ( 1/22 );
     public var surface:    Surface;
+    public var plotting:       Plotting;
     public function new( surface: Surface ){
         this.surface = surface;
+        plotting = Plotting.defaultPlot();
     }
     public inline
     function toXY( east: Float, north: Float ){
@@ -24,67 +27,43 @@ class UKcanvasPlot {
     }
     public inline
     function plotGrid(){
+        var lines = plotting.wideGrid();
         surface.beginFill( 0x0000ff, 0. );
         surface.lineStyle( 1., 0x0c0cf0, 0.2 );
-        var minLat = 49;
-        var maxLat = 60;
-        var minLong = -9;
-        var maxLong = 2;
-        for( lat in minLat...maxLat ){
-            if( (lat+1)%2 == 0 ) continue;
-            var v = toOS( lat, minLong );
-            var xy = toXY( v.east, v.north );
-            surface.moveTo( xy.x, xy.y );
-            for( long in minLong...maxLong ){
-                var v = toOS( lat, long );
-                var xy = toXY( v.east, v.north );
-                surface.lineTo( xy.x, xy.y );
-                var v = toOS( lat, long + 0.25 );
-                var xy = toXY( v.east, v.north );
-                surface.lineTo( xy.x, xy.y );
-                var v = toOS( lat, long + 0.5 );
-                var xy = toXY( v.east, v.north );
-                surface.lineTo( xy.x, xy.y );
-                var v = toOS( lat, long + 0.75 );
-                var xy = toXY( v.east, v.north );
-                surface.lineTo( xy.x, xy.y );
-            }
-            var v = toOS( lat, maxLong + 1. );
-            var xy = toXY( v.east, v.north );
-            surface.lineTo( xy.x, xy.y );
-        }
-        
-        for( long in minLong...maxLong+2 ){
-            if( (long+1)%2 == 0 ) continue;
-            var v = toOS( minLat, long );
-            var xy = toXY( v.east, v.north );
-            surface.moveTo( xy.x, xy.y );
-            for( lat in minLat...maxLat ){
-                var v = toOS( lat, long );
-                var xy = toXY( v.east, v.north );
-                surface.lineTo( xy.x, xy.y );
+        var no =   lines.length;
+        var line:  Array<XY>;
+        var len:   Int;
+        var point: XY;
+        for( i in 0...no ){
+            line =  lines[ i ];
+            len =   line.length;
+            point = line[ 0 ];
+            surface.moveTo( point.x, point.y );
+            for( j in 1...len ){
+                point = line[ j ];
+                surface.lineTo( point.x, point.y );
             }
         }
         surface.endFill();
     }
+    /*
     public inline
-    function toOS( latitude: Float, longitude: Float ): { east: Float, north: Float }{
-        var val = ll.ll_to_osOld( latitude, longitude );
-        return val;
-    }
+    function toOS( latitude: Float, longitude: Float ): EastNorth {
+        return LatLongUK.ll_to_osOld( { lat: latitude, long: longitude } );
+    }*/
     public
     function plot( eastNorth: EastNorth, cases: Int, colors: Array<Int> ){
         var size      = cases*sizeScale;
         var fillColor = colors[ Math.round( cases*colorChange ) ];
-        var p = toXY( eastNorth.east, eastNorth.north );
+        var p = plotting.oStoXY( eastNorth );
+        //toXY( eastNorth.east, eastNorth.north );
         var radius = size * 0.5;
         circle36( fillColor, alpha, p.x, p.y, radius );
     }
     public 
     function drawRectBorder(){
-        var ll = new LongLatUK();
-        var min = ll.ll_to_osOld( minX, minY );
-        var max = ll.ll_to_osOld( maxX, maxY );
+        var min = LatLongUK.ll_to_osOld( { lat: minX, long: minY } );
+        var max = LatLongUK.ll_to_osOld( { lat: maxX, long: maxY } );
         var x = min.east * scale + 100;
         var y = 500 - ( min.north ) * scale + 100;
         var w = ( max.east - min.east ) * scale + 100;
