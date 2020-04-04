@@ -14,6 +14,7 @@ import covid19.datas.AddLatLongArr;
 import covid19.datas.City;
 import covid19.datas.CityArr;
 import covid19.datas.DayCounter;
+import covid19.datas.PlotPlace;
 //import latLongUK.LatLongUK;
 import latLongUK.EastNorth;
 import covid19.visual.UKcanvasPlot;
@@ -25,6 +26,8 @@ import pallette.ColorWheel24;
 import uk.CanvasUK;
 import latLongUK.LatLongUK;
 import js.Browser;
+import js.html.CanvasElement;
+import covid19.manager.DataManager;
 // sources... 
 // https://github.com/tomwhite/covid-19-uk-data/blob/master/data/covid-19-cases-uk.csv
 // https://www.doogal.co.uk/AdministrativeAreas.php
@@ -38,135 +41,107 @@ class Main {
     function main(){
         new Main();
     }
-    var csvStats = 'https://raw.githubusercontent.com/tomwhite/covid-19-uk-data/master/data/covid-19-cases-uk.csv';
-    var csvStats2 = '../data/covid19uk.csv';
-    var textLoader:     TextLoader;
-    var longLatArr:     LongLatAreasArr;
-    var stat19Arr:      StatsC19Arr;
-    var area9Arr:       Area9Arr;
-    var citiesArr:      CityArr;
-    var additionalArr:  AddLatLongArr;
-    // assumed start date of data.
-    var dayCounter      = new DayCounter( { day:5, month:3, year:2020} );
+    var dataManager:    DataManager;
     var canvasWrapper:  CanvasWrapper;
     var surface:        Surface;
+    var surface2:       Surface;
     var divertTrace:    DivertTrace;
     var mapPlot:        UKcanvasPlot;
-    var months = [ 'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     public function new(){
         divertTrace = new DivertTrace();
+        canvasSetup();
+        vectorUK();
+        mapPlot = new UKcanvasPlot( surface );
+        dataManager = new DataManager( finished );
+    }
+    function canvasSetup(){
         var canvas = new CanvasWrapper();
         canvas.width  = 1024;
         canvas.height = 768;
         Browser.document.body.appendChild( cast canvas );
         surface = new Surface({ x: 10, y: 10, me: canvas.getContext2d() });
-        vectorUK();
-        mapPlot = new UKcanvasPlot( surface );
-        mapPlot.plotGrid();
-        textLoader = new TextLoader( ['../data/postcodeAdmin.csv'
-                                     ,'../data/E_areas.csv'
-                                     ,'../data/latLongAdditional.csv'
-                                     /*,'../data/SomeCities.csv'*/
-                                     , csvStats ], finished );
     }
-    public
+    var canvas2: CanvasWrapper;
     function vectorUK(){
         // likely fairly approximate
-        var uk = new CanvasUK( surface );
+        canvas2 = new CanvasWrapper();
+        canvas2.width  = 1024;
+        canvas2.height = 768;
+        surface2 = new Surface({ x: 10, y: 10, me: canvas2.getContext2d() });
+        var uk = new CanvasUK( surface2 );
         uk.dx = 28;
         uk.dy = 47;
-        uk.alpha = 0.7;
+        uk.alpha = 0.8;
         uk.scaleY = 0.975;
         uk.scaleX = 1.04;
         uk.draw();
+        var mapPlot2 = new UKcanvasPlot( surface2 );
+        mapPlot2.plotGrid();
     }
-    // don't bother drawing cities not really needed.
-    /*
-    public
-    function drawGraph(){
-        for( i in 0...citiesArr.length ){
-            var city = citiesArr[ i ];
-            var p = mapPlot.toXY( city.east, city.north );
-            mapPlot.circle36( 0x99c799, 0.1, p.x, p.y, 2. );//f7f7f7
-        }
-    }*/
     public function finished(){
-        parseCSV();
         trace('Animating UK data');
-        //drawGraph();
+        var tot = dataManager.getMaxTotal();
+        trace('tot ' + tot );
+        scaleSize = 30/tot;
+        mapPlot.sizeScale = scaleSize;//( 1/(1.8 * 10) );
+        mapPlot.colorChange = 24/tot;
+        trace( dataManager.getUnfound() );
         AnimateTimer.create();
         AnimateTimer.onFrame = render;
     }
+    var scaleSize = 0.;
     var count           = 0;
     var framesDivisor   = 8;
+    var dayNo = 0;
     public function render(i: Int ):Void{
         count++;
         if( count%framesDivisor == 0 ){
             count = 0;
             renderDate();
-            dayCounter.next();
         }
     }
     var unplotted:  String = 'unplotted<br>';
     var lastStr:    String = '';
     var currentStr: String = '';
+    var str = '';
     @:access( htmlHelper.tools.DivertTrace )
-    @:access( surface.me )
     function renderDate(){
+        if( dataManager.getNoDays() > dayNo  ){
+            if( dataManager.getDay( dayNo ).length > 100 ){ // don't clear if it's just wales added
+                mapPlot.clear();
+                var canvasElement: CanvasElement = canvas2;
+                surface.me.drawImage( canvasElement, 0, 0, 1024, 768 );
+            }
+        } 
         lastStr = currentStr + lastStr;
-        var str = '';
+        str = '';
         var colors = ColorWheel24.getWheel();
-        //colors.reverse();
-        var dayStat = stat19Arr.getByDate( dayCounter );
+        var dayStat = dataManager.getDay( dayNo++ );
         for( i in 0...dayStat.length ){
             var stat = dayStat[ i ];
-            var eastNorth = getEastNorth( stat );
-            if( eastNorth.notOrigin ) mapPlot.plot( eastNorth, stat.totalCases, colors );
-            if( eastNorth.notOrigin ){
-                str += '<b>' + stat.totalCases + '</b>' + ' ill, ' + datePretty( stat.date ) + ', ' + stat.area + ' ' + eastNorth.pretty();
-                str += '<br>';
-            } else {
-                unplotted += datePretty( stat.date ) + ', ' + stat.area + ' ' + stat.totalCases + ' ill, ';
-                unplotted += '<br>';
-            }
+            mapPlot.plot( stat.eastNorth, stat.total, colors );
+            str += '<b>' + stat.total + '</b>' 
+                + ' ill, ' + ( new DayCounter( stat.date ) ).pretty() + ', ' 
+                + stat.place + ' ' + stat.eastNorth.pretty();
+            str += '<br>';
         }
-        if( str != '' ) {
-            currentStr = str;
-            //trace( unplotted + '<br>-plotted<br>' + currentStr + lastStr ); // collate traces it's much faster!
-        } else {
-            divertTrace.traceString = '';
-            trace( unplotted + '<br>-plotted<br>' + currentStr + lastStr ); // collate traces it's much faster!
+        currentStr = str;
+        if( dataManager.getNoDays() < dayNo ){
+            traceEndData(); // collate traces it's much faster!
             AnimateTimer.onFrame = function(i: Int ){};
         }
     }
-    inline
-    function getEastNorth( stat: StatsC19 ): EastNorth {
-        var eastNorth =                         additionalArr.eastNorthByArea( stat.area );
-        if( !eastNorth.notOrigin ) eastNorth =  longLatArr.eastNorthByArea( stat.area );
-        if( !eastNorth.notOrigin ) {
-            //trace( stat.area +',' + stat.areaCode +',' );
-            if( area9Arr.area9exists( stat.areaCode ) ) {
-                var area = area9Arr.getPlace( stat.areaCode );
-                eastNorth = longLatArr.eastNorthByArea( area );
-            }
-        }
-        return eastNorth;
+    @:access( htmlHelper.tools.DivertTrace )
+    function traceEndData(){
+        trace('end data');
+        divertTrace.traceString = '';
+        trace( 'not plotted (' + dataManager.getUnfound() + ')<br>' 
+              + 'sizeScale = ' + Math.round((scaleSize/2)*1000)/1000 + 'pixel radius per person' 
+              + '<br>-locations plotted are centre of area health services<br>' 
+              + currentStr + lastStr );
     }
     inline
     function datePretty( date: DateTime ): String {
-        return date.getDay() + ' ' + months[ date.getMonth() - 1 ];
-    }
-    public function parseCSV(){
-        longLatArr     = parseData( 'postcodeAdmin.csv' );
-        stat19Arr      = parseData( 'covid-19-cases-uk.csv' );
-        area9Arr       = parseData( 'E_areas.csv' );
-        additionalArr  = parseData( 'latLongAdditional.csv' );
-        /*citiesArr      = parseData( 'SomeCities.csv' );*/
-    }
-    function parseData( fileNom: String ): Array<Array<String>> {
-        var str         = textLoader.contents.get( fileNom );
-        var arr         = CSV.parse( str );
-        arr.shift(); // remove title
-        return arr;
+        return DayCounter.datePretty( date );
     }
 }

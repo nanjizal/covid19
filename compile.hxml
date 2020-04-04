@@ -10,7 +10,7 @@
 -main covid19.Main
 #-D no-inline
 -D js-flatten 
--dce full
+-dce no
 --next
 # generate html
 -cmd echo '<!DOCTYPE html><meta charset="UTF-8"><html><body><script src="test.js"></script></body></html>' >bin/index.html

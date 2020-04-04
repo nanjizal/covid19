@@ -23,4 +23,12 @@ abstract StatsC19Arr( Array<StatsC19> ) from Array<StatsC19> to Array<StatsC19> 
         }
         return arr;
     }
+    public
+    function getMaxTotal(){
+        var max = 0;
+        for( i in this ){
+            if( i.totalCases > max ) max = i.totalCases;
+        }
+        return max;
+    }
 }

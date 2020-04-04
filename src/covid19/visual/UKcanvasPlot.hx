@@ -11,12 +11,12 @@ class UKcanvasPlot {
     var maxY        = 1.75159;
     public var dx = -57.;
     public var dy = 60.;
-    public var alpha       = 0.3;
+    public var alpha       = 0.9;//0.3;
     public var scale       = 1/2000;
     public var sizeScale   = ( 1/(1.8 * 10) );
     public var colorChange = ( 1/22 );
     public var surface:    Surface;
-    public var plotting:       Plotting;
+    public var plotting:   Plotting;
     public function new( surface: Surface ){
         this.surface = surface;
         plotting = Plotting.defaultPlot();
@@ -54,11 +54,18 @@ class UKcanvasPlot {
     public
     function plot( eastNorth: EastNorth, cases: Int, colors: Array<Int> ){
         var size      = cases*sizeScale;
-        var fillColor = colors[ Math.round( cases*colorChange ) ];
+        var idx = Math.round( cases*colorChange );
+        var idx = ( idx % 24 );
+        var fillColor = colors[ idx ];
         var p = plotting.oStoXY( eastNorth );
         //toXY( eastNorth.east, eastNorth.north );
         var radius = size * 0.5;
         circle36( fillColor, alpha, p.x, p.y, radius );
+    }
+    //@:access( Surface )
+    public
+    function clear(){
+        surface.me.clearRect( 0, 0, 1024, 768 );
     }
     public 
     function drawRectBorder(){
