@@ -1403,7 +1403,7 @@ covid19_Main.prototype = {
 	,traceEndData: function() {
 		haxe_Log.trace("end data",{ fileName : "src/covid19/Main.hx", lineNumber : 136, className : "covid19.Main", methodName : "traceEndData"});
 		this.divertTrace.traceString = "";
-		haxe_Log.trace("not plotted (" + this.dataManager.getUnfound() + ")<br>" + "sizeScale = " + Math.round(this.scaleSize / 2 * 1000) / 1000 + "pixel radius per person" + "<br>-locations plotted are centre of area health services<br>" + this.currentStr + this.lastStr,{ fileName : "src/covid19/Main.hx", lineNumber : 138, className : "covid19.Main", methodName : "traceEndData"});
+		haxe_Log.trace("not plotted (" + this.dataManager.getUnfound() + ")<br>" + "sizeScale = " + Math.round(this.scaleSize / 2 * 10000) / 10000 + "pixel radius per person" + "<br>-locations plotted are centre of area health services<br>" + this.currentStr + this.lastStr,{ fileName : "src/covid19/Main.hx", lineNumber : 138, className : "covid19.Main", methodName : "traceEndData"});
 	}
 	,datePretty: function(date) {
 		var days = ((date - 62135596800.0 - datetime__$DateTime_DateTime_$Impl_$.yearStart(date)) / 86400 | 0) + 1;

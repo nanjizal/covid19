@@ -136,7 +136,7 @@ class Main {
         trace('end data');
         divertTrace.traceString = '';
         trace( 'not plotted (' + dataManager.getUnfound() + ')<br>' 
-              + 'sizeScale = ' + Math.round((scaleSize/2)*1000)/1000 + 'pixel radius per person' 
+              + 'sizeScale = ' + Math.round((scaleSize/2)*10000)/10000 + 'pixel radius per person' 
               + '<br>-locations plotted are centre of area health services<br>' 
               + currentStr + lastStr );
     }
