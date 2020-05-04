@@ -1,0 +1,230 @@
+GB-BKM,Buckinghamshire,two-tier county,51.6337949,-0.5423292000000401 
+GB-CAM,Cambridgeshire,two-tier county,52.4091753,0.2619601999999759 
+GB-CMA,Cumbria,two-tier county,54.6060946,-3.5318065999999817 
+GB-DBY,Derbyshire,two-tier county,52.973222,-1.3571610000000192 
+GB-DEV,Devon,two-tier county,50.7772135,-3.9994609999999966 
+GB-DOR,Dorset,two-tier county,51.037424,-2.27470100000005 
+GB-ESX,East Sussex,two-tier county,50.9278293,0.13243230000000494 
+GB-ESS,Essex,two-tier county,51.547337,0.5745349999999689 
+GB-GLS,Gloucestershire,two-tier county,51.8929617,-2.1578916999999365 
+GB-HAM,Hampshire,two-tier county,51.3652154,-1.5259141999999883 
+GB-HRT,Hertfordshire,two-tier county,51.7519553,-0.23856380000006538 
+GB-KEN,Kent,two-tier county,51.38129,0.22030599999993683 
+GB-LAN,Lancashire,two-tier county,53.6828744,-2.656024099999968 
+GB-LEC,Leicestershire,two-tier county,52.6347704,-1.1295191000000386 
+GB-LIN,Lincolnshire,two-tier county,53.234863,-0.538436000000047 
+GB-NFK,Norfolk,two-tier county,52.755702,0.39888199999995777 
+GB-NYK,North Yorkshire,two-tier county,54.158824,-1.5421126999999615 
+GB-NTH,Northamptonshire,two-tier county,52.2368744,-0.8973905999999943 
+GB-NTT,Nottinghamshire,two-tier county,52.9551147,-1.1491717999999764 
+GB-OXF,Oxfordshire,two-tier county,51.836642,-1.3199019999999564 
+GB-SOM,Somerset,two-tier county,51.2270511,-2.3279255999999577 
+GB-STS,Staffordshire,two-tier county,52.8129085,-2.0821780999999646 
+GB-SFK,Suffolk,two-tier county,52.127072,1.4105260000000044 
+GB-SRY,Surrey,two-tier county,51.1917906,-0.4462819999999965 
+GB-WAR,Warwickshire,two-tier county,52.284972,-1.609958000000006 
+GB-WSX,West Sussex,two-tier county,50.816021,-0.9184020000000146 
+GB-WOR,Worcestershire,two-tier county,52.198769,-2.2436669999999594 
+GB-BDG,Barking and Dagenham,london borough,51.536279,0.08147789999998167 
+GB-BNE,Barnet,london borough,51.6529294,-0.1996059000000514 
+GB-BEX,Bexley,london borough,51.4413546,0.1486101000000417 
+GB-BEN,Brent,london borough,51.5000387,-0.23016770000003817 
+GB-BRY,Bromley,london borough,51.4056832,0.014349700000025223 
+GB-CMD,Camden,london borough,51.5517059,-0.15882550000003448 
+GB-CRY,Croydon,london borough,51.3723608,-0.10040149999997539 
+GB-EAL,Ealing,london borough,51.5133506,-0.3042136000000255 
+GB-ENF,Enfield,london borough,51.652096,-0.08153300000003583 
+GB-GRE,Greenwich,london borough,51.47527,-0.013130000000046493 
+GB-HCK,Hackney,london borough,51.51648,-0.1028999999999769 
+GB-HMF,Hammersmith and Fulham,london borough,51.4929163,-0.22579159999997955 
+GB-HRY,Haringey,london borough,51.57719,-0.09814000000005763 
+GB-HRW,Harrow,london borough,51.5788094,-0.33376050000003943 
+GB-HAV,Havering,london borough,51.577924,0.21208290000004126 
+GB-HIL,Hillingdon,london borough,50.741327,-2.7455340000000206 
+GB-HNS,Hounslow,london borough,51.467586,-0.3617990000000191 
+GB-ISL,Islington,london borough,51.5349798,-0.10373789999994187 
+GB-KEC,Kensington and Chelsea,london borough,51.5018856,-0.19089480000002368 
+GB-KTT,Kingston upon Thames,london borough,51.412317,-0.3004429999999729 
+GB-LBH,Lambeth,london borough,51.47241,-0.16416000000003805 
+GB-LEW,Lewisham,london borough,51.456879,-0.015964400000029855 
+GB-MRT,Merton,london borough,51.4156715,-0.19181400000002213 
+GB-NWM,Newham,london borough,51.519542,0.04041699999993398 
+GB-RDB,Redbridge,london borough,51.58861,0.08239760000003571 
+GB-RIC,Richmond upon Thames,london borough,51.4613418,-0.3035466000000042 
+GB-SWK,Southwark,london borough,51.4834479,-0.08208769999998822 
+GB-STN,Sutton,london borough,51.34424,-0.1975600000000668 
+GB-TWH,Tower Hamlets,london borough,51.5202607,-0.0293395999999575 
+GB-WFT,Waltham Forest,london borough,51.5886383,-0.01176250000003165 
+GB-WND,Wandsworth,london borough,51.4567897,-0.19267949999994016 
+GB-WSM,Westminster,london borough,51.5096446,-0.1585863000000245 
+GB-BNS,Barnsley,metropolitan district,53.5529326,-1.481272200000035 
+GB-BIR,Birmingham,metropolitan district,52.4829614,-1.8935920000000124 
+GB-BOL,Bolton,metropolitan district,53.5784742,-2.429915199999982 
+GB-BRD,Bradford,metropolitan district,53.793853,-1.7524422000000186 
+GB-BUR,Bury,metropolitan district,53.5934589,-2.298540199999934 
+GB-CLD,Calderdale,metropolitan district,53.7420418,-1.9952690000000075 
+GB-COV,Coventry,metropolitan district,52.4058375,-1.51266099999998 
+GB-DNC,Doncaster,metropolitan district,53.5230412,-1.1337621999999783 
+GB-DUD,Dudley,metropolitan district,52.508672,-2.087335400000029 
+GB-GAT,Gateshead,metropolitan district,54.9593729,-1.6018252000000075 
+GB-KIR,Kirklees,metropolitan district,53.5933432,-1.8009508999999753 
+GB-KWL,Knowsley,metropolitan district,53.457035,-2.853080200000022 
+GB-LDS,Leeds,metropolitan district,53.7996388,-1.5491220999999769 
+GB-LIV,Liverpool,metropolitan district,53.4107766,-2.9778383000000304 
+GB-MAN,Manchester,metropolitan district,53.4807125,-2.234376500000053 
+GB-NET,Newcastle upon Tyne,metropolitan district,54.9778404,-1.612916499999983 
+GB-NTY,North Tyneside,metropolitan district,55.008,-1.5460000000000491 
+GB-OLD,Oldham,metropolitan district,53.541277,-2.1176619999999957 
+GB-RCH,Rochdale,metropolitan district,53.6163516,-2.158710199999973 
+GB-ROT,Rotherham,metropolitan district,53.4301709,-1.356896699999993 
+GB-SHN,St. Helens,metropolitan district,53.4538756,-2.7368942000000516 
+GB-SLF,Salford,metropolitan district,53.487707,-2.290419799999995 
+GB-SAW,Sandwell,metropolitan district,52.5036188,-1.9657042999999703 
+GB-SFT,Sefton,metropolitan district,53.5019362,-2.97399919999998 
+GB-SHF,Sheffield,metropolitan district,53.3830548,-1.4647952999999916 
+GB-SOL,Solihull,metropolitan district,52.4147109,-1.77429589999997 
+GB-STY,South Tyneside,metropolitan district,54.9636693,-1.4418633999999884 
+GB-SKP,Stockport,metropolitan district,53.4084881,-2.1492931000000226 
+GB-SND,Sunderland,metropolitan district,54.9044493,-1.3814532999999756 
+GB-TAM,Tameside,metropolitan district,53.4855515,-2.09768489999999 
+GB-TRF,Trafford,metropolitan district,53.4683994,-2.3256433000000243 
+GB-WKF,Wakefield,metropolitan district,53.682965,-1.4990970000000061 
+GB-WLL,Walsall,metropolitan district,52.5859475,-1.982289499999979 
+GB-WGN,Wigan,metropolitan district,53.5442699,-2.63106300000004 
+GB-WRL,Wirral,metropolitan district,53.377974,-3.108818000000042 
+GB-WLV,Wolverhampton,metropolitan district,52.5857278,-2.129250700000057 
+GB-LND,London,City of,city corporation,51.5001524,-0.12623619999999391 
+GB-ABE,Aberdeen City,council area,57.1474915,-2.095397000000048 
+GB-ABD,Aberdeenshire,council area,57.1621429,-2.7194167000000107 
+GB-ANS,Angus,council area,56.7969965,-2.920681800000011 
+GB-AGB,Argyll and Bute,council area,55.9942351,-5.444033200000035 
+GB-CLK,Clackmannanshire,council area,56.1241394,-3.758378999999991 
+GB-DGY,Dumfries and Galloway,council area,55.0690002,-3.607779599999958 
+GB-DND,Dundee City,council area,56.4614282,-2.968110900000056 
+GB-EAY,East Ayrshire,council area,55.4592315,-4.333803200000034 
+GB-EDU,East Dunbartonshire,council area,55.9755216,-4.210514900000021 
+GB-ELN,East Lothian,council area,55.9493383,-2.770446399999969 
+GB-ERW,East Renfrewshire,council area,55.8298581,-4.542838500000016 
+GB-EDH,Edinburgh,City of,council area,55.9501755,-3.187535900000057 
+GB-ELS,Eilean Siar,council area,58.1047127,-6.697628799999961 
+GB-FAL,Falkirk,council area,56.0006668,-3.7843589000000293 
+GB-FIF,Fife,council area,56.2082078,-3.1495175000000017 
+GB-GLG,Glasgow City,council area,55.8656274,-4.257222700000057 
+GB-HED,Highland,council area,58.4666667,-3.0666667000000416 
+GB-IVC,Inverclyde,council area,55.9118089,-4.735906300000011 
+GB-MLN,Midlothian,council area,55.8292247,-3.133842800000025 
+GB-MRY,Moray,council area,57.511548,-3.2483773000000156 
+GB-NAY,North Ayrshire,council area,55.7113902,-4.729983400000037 
+GB-NLK,North Lanarkshire,council area,55.8289139,-3.922195800000054 
+GB-ORR,Orkney Islands,council area,59.0238559,-2.9889338000000407 
+GB-PKN,Perth and Kinross,council area,56.3953367,-3.4346610000000055 
+GB-RFW,Renfrewshire,council area,55.8298581,-4.542838500000016 
+GB-SCB,Scottish Borders,The,council area,55.5485697,-2.7861388000000034 
+GB-ZET,Shetland Islands,council area,60.4936893,-1.381707199999937 
+GB-SAY,South Ayrshire,council area,55.4635688,-4.633187399999997 
+GB-SLK,South Lanarkshire,council area,55.5243038,-3.7035077000000456 
+GB-STG,Stirling,council area,56.1194238,-3.9358819999999923 
+GB-WDU,West Dunbartonshire,council area,55.9650641,-4.506359599999996 
+GB-WLN,West Lothian,council area,55.9070198,-3.5517167000000427 
+GB-ANT,Antrim,district council area,54.7133822,-6.216760900000054 
+GB-ARD,Ards,district council area,54.5490339,-5.532180000000039 
+GB-ARM,Armagh,district council area,54.3475392,-6.656108200000062 
+GB-BLA,Ballymena,district council area,54.8631169,-6.27834299999995 
+GB-BLY,Ballymoney,district council area,55.070718,-6.514895000000024 
+GB-BNB,Banbridge,district council area,54.3510361,-6.2670201999999335 
+GB-BFS,Belfast,district council area,54.5972686,-5.930108799999971 
+GB-CKF,Carrickfergus,district council area,54.7210869,-5.791205300000001 
+GB-CSR,Castlereagh,district council area,54.5697361,-5.893457600000033 
+GB-CLR,Coleraine,district council area,55.1319935,-6.668451399999981 
+GB-CKT,Cookstown,district council area,54.6458606,-6.74514929999998 
+GB-CGV,Craigavon,district council area,54.4481176,-6.3875785999999835 
+GB-DRY,Derry,district council area,54.9945099,-7.3199955000000045 
+GB-DOW,Down,district council area,54.3412911,-5.748485399999936 
+GB-DGN,Dungannon,district council area,54.5028522,-6.769568299999946 
+GB-FER,Fermanagh,district council area,54.4513524,-7.712501800000041 
+GB-LRN,Larne,district council area,54.8551031,-5.811254500000018 
+GB-LMV,Limavady,district council area,55.0508545,-6.95053699999994 
+GB-LSB,Lisburn,district council area,54.510893,-6.042726000000016 
+GB-MFT,Magherafelt,district council area,54.7554017,-6.606028599999945 
+GB-MYL,Moyle,district council area,55.1149383,-6.153783900000008 
+GB-NYM,Newry and Mourne,district council area,54.1780417,-6.335768700000017 
+GB-NTA,Newtownabbey,district council area,54.684823,-5.965868499999942 
+GB-NDN,North Down,district council area,54.6397427,-5.710525599999983 
+GB-OMH,Omagh,district council area,54.6003046,-7.298401900000044 
+GB-STB,Strabane,district council area,54.8234317,-7.4683738999999605 
+GB-BAS,Bath and North East Somerset,unitary authority (england),51.3636293,-2.439998699999933 
+GB-BBD,Blackburn with Darwen,unitary authority (england),53.6898596,-2.467862500000024 
+GB-BDF,Bedford,unitary authority (england),52.1357092,-0.46804420000000846 
+GB-BPL,Blackpool,unitary authority (england),53.814165,-3.053513500000008 
+GB-BMH,Bournemouth,unitary authority (england),50.7216814,-1.8785265999999865 
+GB-BRC,Bracknell Forest,unitary authority (england),51.4076953,-0.7299759999999651 
+GB-BNH,Brighton and Hove,unitary authority (england),50.819522,-0.13642000000004373 
+GB-BST,Bristol,City of,unitary authority (england),51.4553129,-2.591902300000015 
+GB-CBF,Central Bedfordshire,unitary authority (england),,
+GB-CHE,Cheshire East,unitary authority (england),41.4989861,-72.90065800000002 
+GB-CHW,Cheshire West and Chester,unitary authority (england),41.4989861,-72.90065800000002 
+GB-CON,Cornwall,unitary authority (england),50.3226691,-5.019578799999977 
+GB-DAL,Darlington,unitary authority (england),54.5287339,-1.553050600000006 
+GB-DER,Derby,unitary authority (england),52.9218993,-1.4756419999999935 
+GB-DUR,Durham,unitary authority (england),54.7786923,-1.5596050999999989 
+GB-ERY,East Riding of Yorkshire,unitary authority (england),53.8215889,-0.7189977000000454 
+GB-HAL,Halton,unitary authority (england),53.334258,-2.6947440000000142 
+GB-HPL,Hartlepool,unitary authority (england),54.6824924,-1.216696899999988 
+GB-HEF,Herefordshire,unitary authority (england),52.0765164,-2.654418200000009 
+GB-IOW,Isle of Wight,unitary authority (england),50.6927176,-1.316710300000068 
+GB-KHL,Kingston upon Hull,unitary authority (england),53.7581538,-0.33182769999996253 
+GB-LCE,Leicester,unitary authority (england),52.6347704,-1.1295191000000386 
+GB-LUT,Luton,unitary authority (england),51.879652,-0.41755799999998544 
+GB-MDW,Medway,unitary authority (england),51.4084923,0.5878457000000026 
+GB-MDB,Middlesbrough,unitary authority (england),54.5730073,-1.2379105999999638 
+GB-MIK,Milton Keynes,unitary authority (england),52.0422,-0.7047000000000025 
+GB-NEL,North East Lincolnshire,unitary authority (england),53.5527097,-0.08846419999997579 
+GB-NLN,North Lincolnshire,unitary authority (england),53.5942814,-0.648982100000012 
+GB-NSM,North Somerset,unitary authority (england),51.4409659,-2.7426527999999735 
+GB-NBL,Northumberland,unitary authority (england),55.3378051,-2.25668440000004 
+GB-NGM,Nottingham,unitary authority (england),52.9551147,-1.1491717999999764 
+GB-PTE,Peterborough,unitary authority (england),52.5702461,-0.24373370000000705 
+GB-PLY,Plymouth,unitary authority (england),50.3703805,-4.142652999999996 
+GB-POL,Poole,unitary authority (england),50.7194116,-1.9811296000000311 
+GB-POR,Portsmouth,unitary authority (england),50.7989137,-1.0911627000000408 
+GB-RDG,Reading,unitary authority (england),51.455041,-0.9690884000000324 
+GB-RCC,Redcar and Cleveland,unitary authority (england),54.5393369,-1.0310219000000416 
+GB-RUT,Rutland,unitary authority (england),52.6583014,-0.6396429999999782 
+GB-SHR,Shropshire,unitary authority (england),52.5864845,-2.7037500999999793 
+GB-SLG,Slough,unitary authority (england),51.5093466,-0.5954477000000225 
+GB-SGC,South Gloucestershire,unitary authority (england),51.531456,-2.454715800000031 
+GB-STH,Southampton,unitary authority (england),50.904966,-1.4032339999999976 
+GB-SOS,Southend-on-Sea,unitary authority (england),51.540905,0.7114900000000262 
+GB-STT,Stockton-on-Tees,unitary authority (england),54.5682262,-1.3144336000000294 
+GB-STE,Stoke-on-Trent,unitary authority (england),53.0265029,-2.1766360000000304 
+GB-SWD,Swindon,unitary authority (england),51.5584185,-1.781985099999929 
+GB-TFW,Telford and Wrekin,unitary authority (england),52.7409916,-2.486858600000005 
+GB-THR,Thurrock,unitary authority (england),51.5,0.41666669999995065 
+GB-TOB,Torbay,unitary authority (england),50.4517705,-3.5579060999999683 
+GB-WRT,Warrington,unitary authority (england),53.39263,-2.586988799999972 
+GB-WBX,West Berkshire,unitary authority (england),51.4659863,-1.2814014000000498 
+GB-WNM,Windsor and Maidenhead,unitary authority (england),51.4917059,-0.7321755000000394 
+GB-WOK,Wokingham,unitary authority (england),51.4109723,-0.8349256000000196 
+GB-YOR,York,unitary authority (england),53.9577018,-1.0822855000000118 
+GB-BGW,Blaenau Gwent,unitary authority (wales),51.7666667,-3.1666666999999507 
+GB-BGE,Bridgend;Pen-y-bont ar Ogwr,unitary authority (wales),51.5072638,-3.581042499999967 
+GB-CAY,Caerphilly;Caerffili,unitary authority (wales),51.5785968,-3.2180610000000343 
+GB-CRF,Cardiff;Caerdydd,unitary authority (wales),51.4813069,-3.1804978999999776 
+GB-CMN,Carmarthenshire;Sir Gaerfyrddin,unitary authority (wales),51.8566796,-4.328352399999972 
+GB-CGN,Ceredigion;Sir Ceredigion,unitary authority (wales),52.2675185,-4.563447999999994 
+GB-CWY,Conwy,unitary authority (wales),53.2817227,-3.828438600000027 
+GB-DEN,Denbighshire;Sir Ddinbych,unitary authority (wales),53.1833219,-3.4205660999999736 
+GB-FLN,Flintshire;Sir y Fflint,unitary authority (wales),53.1801164,-3.129874299999983 
+GB-GWN,Gwynedd,unitary authority (wales),52.8928932,-3.995846400000005 
+GB-AGY,Isle of Anglesey;Sir Ynys Môn,unitary authority (wales),53.255045,-4.303615000000036 
+GB-MTY,Merthyr Tydfil;Merthyr Tudful,unitary authority (wales),51.747508,-3.3780510000000277 
+GB-MON,Monmouthshire;Sir Fynwy,unitary authority (wales),51.7682335,-3.19077249999998 
+GB-NTL,Neath Port Talbot;Castell-nedd Port Talbot,unitary authority (wales),51.636884,-3.817313000000013 
+GB-NWP,Newport;Casnewydd,unitary authority (wales),51.5877406,-2.9983431000000564 
+GB-PEM,Pembrokeshire;Sir Benfro,unitary authority (wales),51.6713023,-4.70091960000002 
+GB-POW,Powys,unitary authority (wales),52.1430868,-3.3736820999999964 
+GB-RCT,Rhondda,Cynon,Taff;Rhondda,Cynon,Taf,unitary authority (wales),51.614833,-3.317741999999953 
+GB-SWA,Swansea;Abertawe,unitary authority (wales),51.6204415,-3.94662859999994 
+GB-TOF,Torfaen;Tor-faen,unitary authority (wales),, 
+GB-VGL,Vale of Glamorgan,The;Bro Morgannwg,unitary authority (wales),51.5,-3.3333333000000493 
+GB-WRX,Wrexham;Wrecsam,unitary authority (wales),53.0469077,-2.991673300000002 
